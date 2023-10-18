@@ -48,7 +48,10 @@ export default {
 <style scoped>
 #btn{
   position: absolute;
-  top: 15%;
+  width: 5vw;
+  height: 4vh;
+  font-size: 1vw;
+  top: 14.5%;
   right: 2.5%;
   text-align: center; 
   margin: auto;
