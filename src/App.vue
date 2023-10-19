@@ -5,6 +5,7 @@ import HomeButton from './components/HomeButton.vue'
 import LogoutButton from './components/LogoutButton.vue'
 import HeartButton from './components/HeartButton.vue'
 import SearchContainer from './components/ProductSearchForm.vue'
+// import Login from './components/Login.vue'
 </script>
 
 <template>
