@@ -1,12 +1,13 @@
 import { createRouter, createWebHistory } from 'vue-router'
 const router = createRouter({
-    history: createWebHashHistory(),
+    history: createWebHistory(),
     routes: [
+      /*
       {
         path: "/",
         name: "LandingPage",
         component: () => import("../views/LandingPage.vue"),
-      },
+      }, */
       {
         path: "/About",
         name: "About",
@@ -36,6 +37,11 @@ const router = createRouter({
         path: "/SearchPage",
         name: "SearchPage",
         component: () => import("../views/SearchPage.vue"),
+      },
+      {
+        path: "/WishlistPage",
+        name: "WishlistPage",
+        component: () => import("../views/WishlistPage.vue"),
       },
     ],
 });
