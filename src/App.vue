@@ -18,6 +18,15 @@ import SearchContainer from './components/ProductSearchForm.vue'
     <SearchContainer />
   </div>
 
+  <router-view />  
+
+<!--
+  <div id="nav">
+    <router-link to = "WishlistPage">Wishlist</router-link>
+    
+  </div>
+-->
+  
   <div id="app"></div>  
 </template>
 

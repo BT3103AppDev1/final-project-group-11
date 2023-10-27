@@ -2,13 +2,16 @@
   <div class="HomeButton">
     <img src="@/assets/home.png" alt="Home" @click="goHome" />
   </div>
+  
 </template>
 
 <script>
 export default {
+  name: 'HomeButton',
+
   methods: {
     goHome() {
-      // can use router.push('/home')
+      return this.$router.push('About');
     },
   },
 };

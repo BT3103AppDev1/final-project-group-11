@@ -2,13 +2,16 @@
   <div class="HeartButton">
     <img src="@/assets/heart.png" alt="Heart" @click="goToFolder" />
   </div>
+  
 </template>
 
 <script>
 export default {
+  name: 'HeartButton',
+
   methods: {
     goToFolder() {
-      // can use router.push('/folder')
+      return this.$router.push('WishlistPage');
     },
   },
 };
