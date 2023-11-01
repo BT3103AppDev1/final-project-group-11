@@ -9,7 +9,6 @@ import SearchPage from '@/views/SearchPage.vue'
 import WishlistPage from '@/views/WishlistPage.vue'
 
 const routes = [
-      
       {
         path: "/",
         name: "LandingPage",
@@ -49,10 +48,16 @@ const routes = [
         path: "/WishlistPage",
         name: "WishlistPage",
         component: WishlistPage,
-      }
+      },
+      {
+        path: "/WishlistPage/:folderName",
+        name: "WishlistPageFolder",
+        component: () => import("../views/WishlistPage.vue"), 
+      },
     ]
+
     const router = createRouter({
-        history: createWebHistory(),
-        routes
+      history: createWebHistory(),
+      routes
 });
 export default router;
