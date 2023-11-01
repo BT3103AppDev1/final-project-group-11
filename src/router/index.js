@@ -1,48 +1,58 @@
 import { createRouter, createWebHistory } from 'vue-router'
-const router = createRouter({
-    history: createWebHistory(),
-    routes: [
-      /*
+import LandingPage from '@/views/LandingPage.vue'
+import About from '@/views/About.vue'
+import ContactUs from '@/views/ContactUs.vue'
+import Login from '@/views/Login.vue'
+import MainPage from '@/views/MainPage.vue'
+import Register from '@/views/Register.vue'
+import SearchPage from '@/views/SearchPage.vue'
+import WishlistPage from '@/views/WishlistPage.vue'
+
+const routes = [
+      
       {
         path: "/",
         name: "LandingPage",
-        component: () => import("../views/LandingPage.vue"),
-      }, */
+        component: LandingPage,
+      }, 
       {
         path: "/About",
         name: "About",
-        component: () => import("../views/About.vue"),
+        component: About,
       },
       {
         path: "/ContactUs",
         name: "ContactUs",
-        component: () => import("../views/ContactUs.vue"),
+        component: ContactUs,
       },
       {
         path: "/Login",
         name: "Login",
-        component: () => import("../views/Login.vue"),
+        component: Login,
       },
       {
         path: "/MainPage",
         name: "MainPage",
-        component: () => import("../views/MainPage.vue"),
+        component: MainPage,
       },
       {
         path: "/Register",
         name: "Register",
-        component: () => import("../views/Register.vue"),
+        component:Register,
       },
       {
         path: "/SearchPage",
         name: "SearchPage",
-        component: () => import("../views/SearchPage.vue"),
+        component: SearchPage,
       },
       {
         path: "/WishlistPage",
         name: "WishlistPage",
-        component: () => import("../views/WishlistPage.vue"),
-      },
-    ],
+        component: WishlistPage,
+      }
+    ]
+    const router = createRouter({
+        history: createWebHistory(),
+        routes
 });
 export default router;
