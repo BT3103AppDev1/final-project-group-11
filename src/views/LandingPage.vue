@@ -278,8 +278,9 @@
   </style>
    -->
 
-   <template>
+  <template>
     <NavBar/>
+    <Login />
     <div class="landing-page">
       <header>
         <h1>Welcome to Compare Cart</h1>
@@ -310,9 +311,15 @@
   </template>
   
   <script>
+  import Login from '@/components/Login.vue';
+  console.log("on LandingPage")
+
   export default {
-    // need to complete logic 
-  };
+    name:"LandingPage",
+    components: {
+      Login,
+    },
+  }
   </script>
   
   <style scoped>

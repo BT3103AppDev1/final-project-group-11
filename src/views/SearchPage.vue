@@ -1,5 +1,5 @@
 <template>
-  <div class="search-page">
+  <div class="search-page" v-if="user">
     <BackButton/>
     <CompareCart/>
     <HomeButton/>
@@ -26,6 +26,9 @@ import SortBy from '../components/SortBy.vue'
 import DropDown from '../components/DropDown.vue'
 import Product from '../components/Product.vue'
 import { defineComponent } from "vue";
+import firebaseApp from '../firebase.js';
+import {getAuth, onAuthStateChanged} from "firebase/auth";
+
 export default {
     name:"SearchPage",
     components: {
@@ -37,6 +40,21 @@ export default {
       SortBy, 
       DropDown
     },
+    data(){
+      return{
+        user: false,
+        useremail: "",
+      }
+    },
+    mounted() {
+      const auth = getAuth();
+      onAuthStateChanged(auth, (user) => {
+        if (user) {
+          this.user = user;
+          this.useremail = user.useremail;
+      }
+    })
+  },
 }
 </script>
 

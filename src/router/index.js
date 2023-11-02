@@ -52,7 +52,8 @@ const routes = [
       {
         path: "/WishlistPage/:folderName",
         name: "WishlistPageFolder",
-        component: () => import("../views/WishlistPage.vue"), 
+        component: SearchPage, // a placeholder for now cause i cant access innerwishlistpage
+        // component: Inner-wishlist-page,
       },
     ]
 

@@ -4,38 +4,48 @@
         <img src="@/assets/folder.png" alt="Open Folder" />
     </div>
 
-    <div class="folder-content">
-        <input v-model="folderName" :placeholder="isEditing ? 'Edit folder name' : 'Folder Name'" @blur="saveFolderName" @input="editingFolderName" @click="startEditing" />
-    </div>
+    <input
+      v-model="folderName"
+      @input="validateFolderName"
+      @keydown.enter="createFolder" 
+      placeholder="Enter folder name"
+    />
+
+    <div class="error-message" v-if="folderNameError">{{ folderNameError }}</div>
+  
+    <!-- <button @click="createFolder">Create Folder</button>  Add a button to create the folder -->
+
   </div>
 </template>
 
 <script>
 export default {
-  name: 'FolderItem',
-
   props: {
-    initialName: String, // Initial folder name
+    value: String, 
   },
+
   data() {
     return {
-      folderName: this.initialName || '',
-      isEditing: false,
+      folderName: this.value,
+      folderNameError: '',
     };
   },
   methods: {
-    startEditing() {
-      this.isEditing = true;
+    validateFolderName() {
+      if (this.folderName.trim() === '') {
+        this.folderNameError = 'Folder name cannot be empty';
+      } else {
+        this.folderNameError = '';
+      }
     },
-    saveFolderName() {
-      this.isEditing = false;
-      // Implement code to save the folder name (e.g., emit an event to parent component)
-    },
-    editingFolderName() {
-      // Implement any additional logic while editing the folder name, if needed
+    createFolder() {
+      if (!this.folderNameError) {
+        this.$emit('folder-created', this.folderName); // Emit the event with the folderName
+      }
     },
   },
 };
+
 </script>
 
 <style scoped>
@@ -55,8 +65,13 @@ input {
   border: none;
   border-bottom: 2px solid #0074d9;
   font-size: 16px;
-  margin-left: 10px;
+  margin: 10px;
+  text-align: center;
 }
 
+.error-message {
+  color: red;
+  font-size: 14px;
+}
 </style>
 

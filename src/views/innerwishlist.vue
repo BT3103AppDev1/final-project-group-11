@@ -1,5 +1,5 @@
 <template>
-    <div class="inner-wishlist-page">
+    <div class="inner-wishlist-page" v-if="user">
       <div class="title">
         <BackButton />
         <CompareCart />
@@ -15,7 +15,7 @@
           <Product v-for="(product, index) in wishlistProducts" :key="index" :product="product" />
         </div>
       </div>
-  
+
       <div class="recommended">
         <!-- Add content for the "recommended" section -->
         <RecommendedProducts />
@@ -24,6 +24,7 @@
       <div class="price-tracker">
         <!-- Add content for the "price tracker" section -->
         <PriceTracker />
+        
       </div>
     </div>
   </template>
@@ -39,7 +40,9 @@
   import PriceTracker from '../components/PriceTracker.vue'
   import SearchBar from '../components/SearchBar.vue';
   import { fetchProducts } from 'firebase.js/firebase'; // Import the fetchProducts function from your firebase.js
-  
+  import firebaseApp from '../firebase.js';
+  import {getAuth, onAuthStateChanged} from "firebase/auth";
+
   export default {
     name: "Inner-wishlist-page",
     components: {
@@ -56,8 +59,21 @@
     data() {
       return {
         wishlistProducts: [],
-      };
+        user:false,
+        useremail: "",
+      }
     },
+
+    mounted() {
+      const auth = getAuth();
+      onAuthStateChanged(auth, (user) => {
+        if (user) {
+          this.user = user;
+          this.useremail = user.useremail;
+      }
+    })
+    },
+
     async created() {
       // Fetch products from Firebase when the component is created
       this.wishlistProducts = await fetchProducts();
