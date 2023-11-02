@@ -4,7 +4,7 @@
     <CompareCart/>
     <HomeButton/>
     <LogOutButton/>
-    <SearchBar/>
+    <DropDown/>
     <div class="pink-box">
       <SortBy/>
       <Product/>
@@ -24,6 +24,7 @@ import LogoutButton from '../components/LogoutButton.vue'
 import Header from '../components/HeaderTitle.vue'
 import SearchBar from '../components/SearchBar.vue'
 import SortBy from '../components/SortBy.vue'
+import DropDown from '../components/DropDown.vue'
 import Product from '../components/Product.vue'
 import { defineComponent } from "vue";
 export default {
@@ -35,7 +36,8 @@ export default {
       LogoutButton,
       SearchBar,
       Product,
-      SortBy
+      SortBy, 
+      DropDown
     },
 }
 </script>
