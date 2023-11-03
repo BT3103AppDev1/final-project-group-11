@@ -22,7 +22,6 @@ import CompareCart from '../components/CompareCart.vue'
 import HomeButton from '../components/HomeButton.vue'
 import LogoutButton from '../components/LogoutButton.vue'
 import Header from '../components/HeaderTitle.vue'
-import SearchBar from '../components/SearchBar.vue'
 import SortBy from '../components/SortBy.vue'
 import DropDown from '../components/DropDown.vue'
 import Product from '../components/Product.vue'
@@ -34,7 +33,6 @@ export default {
       CompareCart,
       HomeButton,
       LogoutButton,
-      SearchBar,
       Product,
       SortBy, 
       DropDown
