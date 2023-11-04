@@ -17,11 +17,37 @@
       </select>
       <br><br>
     </form>
-    <button @click="logSelection">Log Selection</button>
+    <button @click="queryProducts">Search!</button>
+    
   </div>
 </template>
 
 <script>
+import { addDoc, collection, doc, getDoc, getDocs, getFirestore, setDoc} from "firebase/firestore";
+import { getDownloadURL, getStorage, uploadBytes } from "firebase/storage";
+import { query, where } from 'firebase/firestore';
+import { db } from '../firebase';
+import { ref } from 'vue';
+
+const queryProducts = async (selectedProduct, selectedSubcategory) => {
+  const productsCollection = collection(db, 'products');
+  let q = query(productsCollection);
+
+  if (selectedProduct) {
+    q = query(productsCollection, where('ProductCategory', '==', selectedProduct));
+  }
+
+  if (selectedSubcategory) {
+    q = query(productsCollection, where('ProductName', '==', selectedSubcategory));
+  }
+  // Execute the query
+  const querySnapshot = await getDocs(q);
+  querySnapshot.forEach((doc) => {
+    // doc.data() is never undefined for query doc snapshots
+    console.log(doc.id, " => ", doc.data());
+  });
+};
+
 export default {
   data() {
     return {
@@ -61,6 +87,7 @@ export default {
       selectedSubcategory: "",
     };
   },
+
   methods: {
     onProductChange() {
       this.selectedSubcategory = "";
@@ -74,6 +101,18 @@ export default {
       }
       // Change function when connecting to database
     },
+    async queryProducts() {
+      // console.log('Selected Product:', this.selectedProduct);
+      // console.log('Selected Subcategory:', this.selectedSubcategory);
+      if (this.selectedProduct && this.selectedSubcategory) {
+        console.log("Selected Product: " + this.selectedProduct);
+        console.log("Selected Subcategory: " + this.selectedSubcategory);
+        this.products = await queryProducts(this.selectedProduct, this.selectedSubcategory);
+        // console.log('Products:', this.products);
+      } else {
+        console.log("Please select a product and subcategory.");
+      }
+    }
   },
 };
 </script>

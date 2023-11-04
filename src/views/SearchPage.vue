@@ -7,12 +7,6 @@
     <DropDown/>
     <div class="pink-box">
       <SortBy/>
-      <Product/>
-      <Product/>
-      <Product/>
-      <Product/>
-      <Product/>
-      <Product/>
     </div>
   </div>
 </template>
