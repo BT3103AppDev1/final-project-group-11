@@ -3,7 +3,6 @@ import LandingPage from '@/views/LandingPage.vue'
 import About from '@/views/About.vue'
 import ContactUs from '@/views/ContactUs.vue'
 import Login from '@/views/Login.vue'
-import MainPage from '@/views/MainPage.vue'
 import Register from '@/views/Register.vue'
 import SearchPage from '@/views/SearchPage.vue'
 import WishlistPage from '@/views/WishlistPage.vue'
@@ -29,11 +28,6 @@ const routes = [
         path: "/Login",
         name: "Login",
         component: Login,
-      },
-      {
-        path: "/MainPage",
-        name: "MainPage",
-        component: MainPage,
       },
       {
         path: "/Register",

@@ -31,7 +31,7 @@ export default {
 
   methods: {
     goHome() {
-      return this.$router.push('MainPage');
+      return this.$router.push('SearchPage');
     },
   },
 };

@@ -289,7 +289,7 @@
       <section>
         <h2>Discover Our Products</h2>
         <p>Explore our wide range of high-quality products at great prices.</p>
-        <router-link to="/MainPage">
+        <router-link to="/SearchPage">
           <button>Login to View Products</button>
         </router-link>
       </section>
