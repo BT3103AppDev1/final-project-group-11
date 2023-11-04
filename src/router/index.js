@@ -7,6 +7,7 @@ import MainPage from '@/views/MainPage.vue'
 import Register from '@/views/Register.vue'
 import SearchPage from '@/views/SearchPage.vue'
 import WishlistPage from '@/views/WishlistPage.vue'
+import InnerWishlistPage from '@/views/innerwishlist.vue'
 
 const routes = [
       {
@@ -54,6 +55,11 @@ const routes = [
         name: "WishlistPageFolder",
         component: SearchPage, // a placeholder for now cause i cant access innerwishlistpage
         // component: Inner-wishlist-page,
+      },
+      {
+        path: "/InnerWishlistPage",
+        name: "InnerWishlistPage",
+        component: InnerWishlistPage,
       },
     ]
 

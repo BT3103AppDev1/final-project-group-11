@@ -289,29 +289,30 @@
       <section>
         <h2>Discover Our Products</h2>
         <p>Explore our wide range of high-quality products at great prices.</p>
-        <router-link to="/products">
-          <button>View Products</button>
+        <router-link to="/MainPage">
+          <button>Login to View Products</button>
         </router-link>
       </section>
       <section>
         <h2>About Us</h2>
         <p>Learn about our mission and commitment to customer satisfaction.</p>
-        <router-link to="/about">
+        <router-link to="/About">
           <button>About Us</button>
         </router-link>
       </section>
       <section>
         <h2>Contact Us</h2>
         <p>Have questions or need assistance? Contact us today.</p>
-        <router-link to="/contact-us">
+        <router-link to="/ContactUs">
           <button>Contact Us</button>
         </router-link>
       </section>
     </div>
-  </template>
+</template>
   
-  <script>
+<script>
   import Login from '@/components/Login.vue';
+  import NavBar from '@/components/NavBar.vue';
   console.log("on LandingPage")
 
   export default {

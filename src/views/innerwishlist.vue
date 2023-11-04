@@ -27,24 +27,24 @@
         
       </div>
     </div>
-  </template>
+</template>
   
-  <script>
+<script>
   import BackButton from '../components/BackButton.vue' 
   import CompareCart from '../components/CompareCart.vue'
   import HomeButton from '../components/HomeButton.vue'
   import LogoutButton from '../components/LogoutButton.vue'
   import SortBy from '../components/SortBy.vue'
   import Product from '../components/Product.vue'
-  import RecommendedProducts from '../components/RecommendedProducts.vue'
-  import PriceTracker from '../components/PriceTracker.vue'
+//import RecommendedProducts from '../components/RecommendedProducts.vue'
+//import PriceTracker from '../components/PriceTracker.vue'
   import SearchBar from '../components/SearchBar.vue';
-  import { fetchProducts } from 'firebase.js/firebase'; // Import the fetchProducts function from your firebase.js
+//import { fetchProducts } from 'firebase.js/firebase'; // Import the fetchProducts function from your firebase.js
   import firebaseApp from '../firebase.js';
   import {getAuth, onAuthStateChanged} from "firebase/auth";
 
   export default {
-    name: "Inner-wishlist-page",
+    name: "InnerWishlistPage",
     components: {
       BackButton,
       CompareCart,
@@ -52,8 +52,8 @@
       LogoutButton,
       SortBy,
       Product,
-      RecommendedProducts,
-      PriceTracker,
+      // RecommendedProducts,
+      // PriceTracker,
       SearchBar,
     },
     data() {
@@ -79,5 +79,5 @@
       this.wishlistProducts = await fetchProducts();
     },
   };
-  </script>
+</script>
   

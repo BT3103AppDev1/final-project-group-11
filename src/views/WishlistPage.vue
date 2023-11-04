@@ -1,5 +1,5 @@
-<script setup>
-import { ref } from 'vue';
+<script>
+import { ref, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 import SearchContainer from '@/components/ProductSearchForm.vue';
 import Header from '@/components/HeaderTitle.vue';
@@ -7,7 +7,53 @@ import Wishlist from '@/components/WishlistTitle.vue';
 import FolderItem from '@/components/FolderItem.vue';
 import firebaseApp from '../firebase.js';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
+import { computed } from 'vue';
+import NavBar from '@/components/NavBar.vue';
 
+export default {
+  name: "WishlistPage",
+
+  components: {
+    NavBar,
+    SearchContainer,
+    Header,
+    Wishlist,
+    FolderItem,
+    firebaseApp,
+  },
+  data() {
+    return {
+      user: false,
+      useremail: "",
+      newFolderName: "",
+      folderNames: [],
+    };
+  },
+  mounted() {
+      const auth = getAuth();
+      onAuthStateChanged(auth, (user) => {
+        if (user) {
+          this.user = user;
+          this.useremail = user.useremail;
+          console.log("User object in WishlistPage:", this.user);
+      }
+    })
+  },
+  methods: {
+    saveFolder() {
+      if (this.newFolderName.trim() !== '') {
+      this.folderNames.push(this.newFolderName);
+      console.log(this.newFolderName);
+      this.newFolderName = ''; // reset newFolderName
+    }
+  },
+  goToFolder(folderName){
+      console.log('inside goToFolder method with folder:' + folderName);
+      this.$router.push({ name: 'WishlistPageFolder', params: { folderName } });
+    },
+  },
+}
+/*
 const newFolderName = ref('');
 const folderNames = ref([]);
 const router = useRouter();
@@ -28,49 +74,23 @@ const goToFolder = (folderName) => {
 };
 
 const auth = getAuth();
-onAuthStateChanged(auth, (authUser) => {
-  if (authUser) {
-    user = authUser;
-    useremail = authUser.useremail;
-  }
+
+onMounted(() => {
+  onAuthStateChanged(auth, (authUser) => {
+    if (authUser) {
+      user = authUser;
+      useremail = authUser.useremail;
+      console.log('(WishlistPage function) User:', user)
+    }
+  });
 });
+*/
 
-console.log('(Login.vue) User:', user) // Log the value of the user variable
 </script>
-
-<!--
-<script>
-import { ref } from 'vue';
-import { useRouter } from 'vue-router';
-import SearchContainer from '@/components/ProductSearchForm.vue';
-import Header from '@/components/HeaderTitle.vue';
-import Wishlist from '@/components/WishlistTitle.vue';
-import FolderItem from '@/components/FolderItem.vue';
-import firebaseApp from '../firebase.js';
-import { getAuth, onAuthStateChanged } from 'firebase/auth';
-
-const newFolderName = ref('');
-const folderNames = ref([]);
-const router = useRouter();
-
-const saveFolder = () => {
-  if (newFolderName.value.trim() !== '') {
-    folderNames.value.push(newFolderName.value);
-    console.log(newFolderName.value);
-    newFolderName.value = ''; // reset newFolderName
-  }
-};
-
-// Function to navigate to a specific folder page
-const goToFolder = (folderName) => {
-  console.log('inside goToFolder method with folder:' + folderName);
-  router.push({ name: 'WishlistPageFolder', params: { folderName } });
-};
-</script>
--->
 
 <template>
 <div class="wishlist-page" v-if="user">
+  
   <div>
     <NavBar />
     <SearchContainer />
@@ -134,9 +154,9 @@ const goToFolder = (folderName) => {
 }
 
 .add-folder-image {
-  width: 60%;
+  width: 40%;
   height: auto;
-  margin-right: 40px;
+  margin-right: 460px;
 } 
 
 .folder-list{
