@@ -1,5 +1,5 @@
 <template>
-  <div class="Header">
+  <div class="Header" v-if="user">
     <div class="HeaderContent">
       <p>{{ headerText }}</p>
     </div>
@@ -7,6 +7,8 @@
 </template>
 
 <script>
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+
 export default {
 
     name: 'Header',
@@ -14,6 +16,24 @@ export default {
     props:{
     headerText: String 
     },
+
+  data() {
+    return {
+      user: false,
+      useremail: "",
+    };
+  },
+  mounted() {
+    const auth = getAuth();
+    const user = auth.currentUser;
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        this.user = user;
+        this.useremail = user.email;
+        console.log(this.useremail);
+      }
+    });
+  },
     
    /* props: {
     headerText: {

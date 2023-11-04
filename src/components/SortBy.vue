@@ -1,5 +1,5 @@
 <template>
-    <div class="sort-by">
+    <div class="sort-by" v-if="user">
         <h3>Sort by...</h3>
         <button class = "btn" style="margin: 20px;" v-on:click="buttonClick">Relevance</button>
         <button class = "btn" style="margin: 20px;" v-on:click="buttonClick">Sales Volume</button>
@@ -9,12 +9,31 @@
 
 <script>
 import {defineComponent} from "vue";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+
 export default {
     methods:{
         buttonClick() {
             console.log("This button has been clicked")
         },
     },
+    data() {
+    return {
+      user: false,
+      useremail: "",
+    };
+  },
+  mounted() {
+    const auth = getAuth();
+    const user = auth.currentUser;
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        this.user = user;
+        this.useremail = user.email;
+        console.log(this.useremail);
+      }
+    });
+  },
 }
 </script>
 

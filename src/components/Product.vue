@@ -1,5 +1,5 @@
 <template>
-    <div class = "item-box">
+    <div class = "item-box" v-if="user">
         <br><br>
         <img src = "https://contents.mediadecathlon.com/p1800013/5e3f2384cc33d5d67b7be56df9bcf7b6/p1800013.jpg" class = "image-fit">
         <div class="inner-text">
@@ -11,8 +11,28 @@
 </template>
 
 <script>
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+
 export default {
   name: 'Product',
+  data() {
+    return {
+      user: false,
+      useremail: "",
+    };
+  },
+  mounted() {
+    const auth = getAuth();
+    const user = auth.currentUser;
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        this.user = user;
+        this.useremail = user.email;
+        console.log(this.useremail);
+      }
+    });
+  },
+
 };
 </script>
 

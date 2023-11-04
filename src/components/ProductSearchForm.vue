@@ -1,14 +1,18 @@
 <template>
-  <div class="SearchContainer">
+  <div class="SearchContainer" v-if="user">
     <input type="text" placeholder="Enter Your Search Here" v-model="searchQuery" @input="search" />
   </div>
 </template>
 
 <script>
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+
 export default {
   data() {
     return {
       searchQuery: '',
+      user: false,
+      useremail: "",
     };
   },
   methods: {
@@ -16,6 +20,18 @@ export default {
       // Add your search logic here
     },
   },
+  mounted() {
+    const auth = getAuth();
+    const user = auth.currentUser;
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        this.user = user;
+        this.useremail = user.email;
+        console.log(this.useremail);
+      }
+    });
+  },
+
 };
 </script>
 
