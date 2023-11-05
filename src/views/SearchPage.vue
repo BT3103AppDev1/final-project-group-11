@@ -5,9 +5,7 @@
     <HomeButton/>
     <LogOutButton/>
     <DropDown/>
-    <div class="pink-box">
-      <SortBy/>
-    </div>
+    <div class="pink-box"></div>
   </div>
 </template>
 <script>
@@ -16,7 +14,6 @@ import CompareCart from '../components/CompareCart.vue'
 import HomeButton from '../components/HomeButton.vue'
 import LogoutButton from '../components/LogoutButton.vue'
 import Header from '../components/HeaderTitle.vue'
-import SortBy from '../components/SortBy.vue'
 import DropDown from '../components/DropDown.vue'
 import Product from '../components/Product.vue'
 import { defineComponent } from "vue";
@@ -31,7 +28,6 @@ export default {
       HomeButton,
       LogoutButton,
       Product,
-      SortBy, 
       DropDown
     },
     data(){

@@ -18,37 +18,23 @@
       <br><br>
     </form>
     <button @click="queryProducts">Search!</button>
-    
+    <SortBy :queriedProducts="queriedProducts" />
   </div>
 </template>
 
 <script>
 import { addDoc, collection, doc, getDoc, getDocs, getFirestore, setDoc} from "firebase/firestore";
+import SortBy from '../components/SortBy.vue'
 import { getDownloadURL, getStorage, uploadBytes } from "firebase/storage";
 import { query, where } from 'firebase/firestore';
 import { db } from '../firebase';
 import { ref } from 'vue';
 
-const queryProducts = async (selectedProduct, selectedSubcategory) => {
-  const productsCollection = collection(db, 'products');
-  let q = query(productsCollection);
-
-  if (selectedProduct) {
-    q = query(productsCollection, where('ProductCategory', '==', selectedProduct));
-  }
-
-  if (selectedSubcategory) {
-    q = query(productsCollection, where('ProductName', '==', selectedSubcategory));
-  }
-  // Execute the query
-  const querySnapshot = await getDocs(q);
-  querySnapshot.forEach((doc) => {
-    // doc.data() is never undefined for query doc snapshots
-    console.log(doc.id, " => ", doc.data());
-  });
-};
-
+const productsCollection = collection(db, 'products');
 export default {
+  components: {
+    SortBy
+  },
   data() {
     return {
       selectedProduct: "",
@@ -85,6 +71,7 @@ export default {
         ],
       },
       selectedSubcategory: "",
+      queriedProducts: [],
     };
   },
 
@@ -102,15 +89,35 @@ export default {
       // Change function when connecting to database
     },
     async queryProducts() {
-      // console.log('Selected Product:', this.selectedProduct);
-      // console.log('Selected Subcategory:', this.selectedSubcategory);
       if (this.selectedProduct && this.selectedSubcategory) {
         console.log("Selected Product: " + this.selectedProduct);
         console.log("Selected Subcategory: " + this.selectedSubcategory);
-        this.products = await queryProducts(this.selectedProduct, this.selectedSubcategory);
-        // console.log('Products:', this.products);
+
+        let q = query(productsCollection);
+
+        if (this.selectedProduct) {
+          q = query(productsCollection, where('ProductCategory', '==', this.selectedProduct));
+        }
+
+        if (this.selectedSubcategory) {
+          q = query(productsCollection, where('ProductName', '==', this.selectedSubcategory));
+        }
+
+        // Execute the query
+        const querySnapshot = await getDocs(q);
+
+        this.queriedProducts = []; // Clear the array before populating it
+
+        querySnapshot.forEach((doc) => {
+          // Populate the queriedProducts array with the query results
+          this.queriedProducts.push(doc.data());
+        });
+        console.log(this.queriedProducts[0]);
+        // Return the queriedProducts
+        return this.queriedProducts;
       } else {
-        console.log("Please select a product and subcategory.");
+        console.log('Please select a product and subcategory.');
+        return []; // Return an empty array if there's no selection
       }
     }
   },
