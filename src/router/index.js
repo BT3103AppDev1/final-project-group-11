@@ -36,6 +36,11 @@ const routes = [
         component:Register,
       },
       {
+        path: "/PriceTracker",
+        name: "PriceTracker",
+        component: InnerWishlistPage,
+      },
+      {
         path: "/SearchPage",
         name: "SearchPage",
         component: SearchPage,
@@ -56,11 +61,7 @@ const routes = [
         name: "InnerWishlistPage",
         component: InnerWishlistPage,
       },
-      {
-        path: "/PriceTracker",
-        name: "PriceTracker",
-        component: InnerWishlistPage,
-      },
+      
     ]
 
     const router = createRouter({
