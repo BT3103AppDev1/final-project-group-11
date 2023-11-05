@@ -36,9 +36,9 @@ const routes = [
         component:Register,
       },
       {
-        path: "/PriceTracker",
+        path: "/pricetracker",
         name: "PriceTracker",
-        component: InnerWishlistPage,
+        component: PriceTracker,
       },
       {
         path: "/SearchPage",
