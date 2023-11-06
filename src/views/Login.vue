@@ -131,7 +131,7 @@ export default {
 }
 
 button {
-  background-color: #007BFF;
+  background-color: lightsalmon;
   color: white;
   border: none;
   padding: 10px 20px;
@@ -139,6 +139,6 @@ button {
 }
 
 button:hover {
-  background-color: #0056b3;
+  background-color: lightsalmon;
 }
 </style>

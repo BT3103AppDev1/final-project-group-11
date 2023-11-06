@@ -16,11 +16,16 @@
         </div>
         <button type="submit">Submit</button>
       </form>
+      <!-- Display success message if not empty -->
+      <div v-if="successMessage" class="successMessage">
+      {{ successMessage }}
+      </div>
     </div>
 </template>
   
 <script>
 import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { getFirestore, collection, addDoc } from "firebase/firestore";
 
   export default {
     data() {
@@ -28,14 +33,18 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
         name: '',
         email: '',
         message: '',
+        successMessage: "", 
+        user: false,
+        useremail: "",
+
       };
     },
-    data() {
-    return {
-      user: false,
-      useremail: "",
-    };
-  },
+  //   data() {
+  //   return {
+  //     user: false,
+  //     useremail: "",
+  //   };
+  // },
   mounted() {
     const auth = getAuth();
     const user = auth.currentUser;
@@ -48,18 +57,51 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
     });
   },
     methods: {
-      submitForm() {
-        // need to add logic
-      },
+      async submitForm() {
+        const auth = getAuth();
+        const db = getFirestore();
+
+        // Create a new message document in Firestore
+        const messageData = {
+        name: this.name,
+        email: this.email,
+        message: this.message,
+      };
+      try {
+        const docRef = await addDoc(collection(db, "messages"), messageData);
+
+        // Clear the input fields
+        this.name = "";
+        this.email = "";
+        this.message = "";
+
+        // Set the success message
+        this.successMessage = "Message sent successfully! We will contact you back within 48 hours";
+      } catch (error) {
+        // Handle the error if message submission fails
+        console.error("Error sending message: ", error);
+        this.successMessage = "Message sending failed. Please try again later.";
+      }
     },
-  };
-  </script>
+  },
+};
+</script>      
+   
+
   
   <style scoped>
   .contact-us {
-    max-width: 300px;
-    margin: 0 auto;
+    margin-top: -20px;
+    position: absolute;
+    left: 50%;
+    top:50%;
+    transform: translate(-50%, -50%);
     text-align: center;
+    border: 2px solid lightsalmon;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    
   }
   
   .form-group {
@@ -83,5 +125,8 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
     padding: 5px;
     resize: vertical;
   }
+  .successMessage {
+  color: green; 
+}
   </style>
   
