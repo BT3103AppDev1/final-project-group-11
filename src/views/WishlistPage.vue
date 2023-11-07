@@ -22,11 +22,15 @@ export default {
     firebaseApp,
   },
   data() {
-    return {
+  return {
       user: false,
       useremail: "",
       newFolderName: "",
       folderNames: [],
+      productCategories: [
+      'Waterbottle', 'Birthday', 'Dog Products', 'Electronics', 'Fashion',
+      'Home and Kitchen', 'Beauty and Personal Care', 'Sports and Outdoors',
+      'Books and Media', 'Toys and Games'],
     };
   },
   mounted() {
@@ -40,6 +44,7 @@ export default {
     })
   },
   methods: {
+    /* 
     saveFolder() {
       if (this.newFolderName.trim() !== '') {
       this.folderNames.push(this.newFolderName);
@@ -51,41 +56,9 @@ export default {
       console.log('inside goToFolder method with folder:' + folderName);
       this.$router.push({ name: 'WishlistPageFolder', params: { folderName } });
     },
-  },
+  }, */
 }
-/*
-const newFolderName = ref('');
-const folderNames = ref([]);
-const router = useRouter();
-let user = false;
-let useremail = '';
-
-const saveFolder = () => {
-  if (newFolderName.value.trim() !== '') {
-    folderNames.value.push(newFolderName.value);
-    console.log(newFolderName.value);
-    newFolderName.value = ''; // reset newFolderName
-  }
-};
-
-const goToFolder = (folderName) => {
-  console.log('inside goToFolder method with folder:' + folderName);
-  router.push({ name: 'WishlistPageFolder', params: { folderName } });
-};
-
-const auth = getAuth();
-
-onMounted(() => {
-  onAuthStateChanged(auth, (authUser) => {
-    if (authUser) {
-      user = authUser;
-      useremail = authUser.useremail;
-      console.log('(WishlistPage function) User:', user)
-    }
-  });
-});
-*/
-
+}
 </script>
 
 <template>
@@ -97,15 +70,22 @@ onMounted(() => {
     <Wishlist />
   </div>
 
-  <div id="add-folders-title">
-    <Header headerText="Add Folders" />
+  <div id="curr-folders-title">
+    <Header headerText="Current Folders" />
   </div>
 
+<!--
   <div id="products-to-add">
     <Header headerText="Products To Add" />
   </div>
+-->
 
-  
+  <div class="folder-container">
+    <FolderItem v-for="(category, index) in productCategories" :key="index" :folderName="category" />
+  </div>
+</div>
+
+  <!-- 
   <img src="@/assets/new-folder.png" alt="New Folder" class="add-folder-image"/>
 
   <div id="add-folder-name">
@@ -123,16 +103,16 @@ onMounted(() => {
         @click="goToFolder(folder)">{{ folder }}</li>
       </ul>
     </div>
-  </div>
-</div>
+  </div> -->
+
 </template>
 
 <style scoped>
 
-#add-folders-title {
+#curr-folders-title {
   position: absolute;
   left: 20%;
-  top: 34%;
+  top: 40%;
 }
 
 #folders-title {
@@ -141,6 +121,7 @@ onMounted(() => {
   top: 34%;
 }
 
+/* 
 #products-to-add {
   position: absolute;
   left: 20%;
@@ -164,5 +145,16 @@ onMounted(() => {
   left: 60%;
   top: 44%;
   font-size: 1.3vw;
+} */
+
+.folder-container {
+  position: absolute;
+  top: 50%;
+  left: 15%;
+  display: grid; /* Display items horizontally */
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  grid-auto-rows: minmax(100px, auto);
+  max-width: 100%; /* Allow the container to expand up to its content width */
 }
 </style>

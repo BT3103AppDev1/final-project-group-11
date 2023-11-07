@@ -9,6 +9,9 @@ import firebase from '@/uifire.js'
 import 'firebase/compat/auth';
 import * as firebaseui from 'firebaseui'
 import 'firebaseui/dist/firebaseui.css'
+import firebaseApp from "../firebase.js"
+import { collection, getDocs, doc, deleteDoc } from "firebase/firestore";
+
 console.log("in Login.vue")
 
 export default {

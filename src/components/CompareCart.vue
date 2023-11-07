@@ -1,5 +1,5 @@
 <template>
-  <div class="CompareCart">
+  <div class="CompareCart" v-if="user">
     <p class="CompareText">CompareCart</p>
   </div>
 </template>

@@ -8,6 +8,7 @@
     <div class="pink-box"></div>
   </div>
 </template>
+
 <script>
 import BackButton from '../components/BackButton.vue' 
 import CompareCart from '../components/CompareCart.vue'
@@ -19,6 +20,10 @@ import Product from '../components/Product.vue'
 import { defineComponent } from "vue";
 import firebaseApp from '../firebase.js';
 import {getAuth, onAuthStateChanged} from "firebase/auth";
+import { getFirestore, doc, getDoc, setDoc } from 'firebase/firestore';
+import { db } from '../firebase.js';
+
+// console.log("SearchPage db", db);
 
 export default {
     name:"SearchPage",
@@ -34,16 +39,41 @@ export default {
       return{
         user: false,
         useremail: "",
-      }
+      };
     },
-    mounted() {
+    async created() {
+      console.log("in created function");
       const auth = getAuth();
-      onAuthStateChanged(auth, (user) => {
+      const user = auth.currentUser;
+
+      await onAuthStateChanged(auth, (user) => {
+
         if (user) {
           this.user = user;
-          this.useremail = user.useremail;
+          this.useremail = user.email;
+          this.checkAndCreateUserDocument();
+        }
+      });
+    },
+
+   methods: {
+    async checkAndCreateUserDocument() {
+      const db = getFirestore();
+      const userDocRef = doc(db, 'wishlist', this.useremail);
+
+      try {
+        const docSnap = await getDoc(userDocRef);
+
+        if (!docSnap.exists()) {
+          // document does not exist -> create it
+          await setDoc(userDocRef, {});
+          // console.log("doc set with docname:", this.useremail);
+        }
+        // console.log("doc already exists")
+      } catch (error) {
+        console.error('Error checking/creating user document:', error);
       }
-    })
+    },
   },
 }
 </script>

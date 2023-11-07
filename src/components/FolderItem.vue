@@ -1,4 +1,48 @@
 <template>
+  <div class="folder-item">
+    <div class="folder-icon">
+        <img src="@/assets/folder.png" alt="Open Folder" />
+    </div>
+
+    <input
+      :value="folderName"
+      readonly
+    />
+  </div>
+</template>
+
+<script>
+export default {
+  name: "FolderItem",
+  props: {
+    folderName: String,
+  },
+};
+</script>
+
+<style scoped>
+.folder-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.folder-icon img {
+  width: 30%;
+  height: auto;
+}
+
+input {
+  border: none;
+  border-bottom: 2px solid #0074d9;
+  font-size: 16px;
+  margin: 10px;
+  text-align: center;
+}
+</style>
+
+<!-- <template>
   <div class="folder-item" v-if="user">
     <div class="folder-icon">
         <img src="@/assets/folder.png" alt="Open Folder" />
@@ -12,9 +56,6 @@
     />
 
     <div class="error-message" v-if="folderNameError">{{ folderNameError }}</div>
-  
-    <!-- <button @click="createFolder">Create Folder</button>  Add a button to create the folder -->
-
   </div>
 </template>
 
@@ -92,5 +133,6 @@ input {
   color: red;
   font-size: 14px;
 }
-</style>
+</style> 
+-->
 
