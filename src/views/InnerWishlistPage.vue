@@ -19,10 +19,10 @@
     </div>
 
     <div class="recommended">
-      <!-- Add content for the "recommended" section -->
-      <RecommendedProducts />
+      <h3>Recommended Products</h3>
+      <RecommendedProducts :wishlistProducts="wishlistProducts" :queriedProducts="queriedProducts" />
     </div>
-<!--
+
     <div class="price-tracker">
       <PriceTracker />
     </div>
