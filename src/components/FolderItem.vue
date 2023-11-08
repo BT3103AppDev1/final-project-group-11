@@ -1,5 +1,5 @@
 <template>
-  <div class="folder-item">
+  <div class="folder-item" v-if="user">
     <div class="folder-icon">
         <img src="@/assets/folder.png" alt="Open Folder" />
     </div>
@@ -12,10 +12,29 @@
 </template>
 
 <script>
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+
 export default {
   name: "FolderItem",
   props: {
     folderName: String,
+  },
+  data() {
+    return {
+      user: false,
+      useremail: "",
+    };
+  },
+  mounted() {
+    const auth = getAuth();
+    const user = auth.currentUser;
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        this.user = user;
+        this.useremail = user.email;
+        // console.log(this.useremail);
+      }
+    });
   },
 };
 </script>

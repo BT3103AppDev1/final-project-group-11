@@ -40,7 +40,7 @@ export default {
     onAuthStateChanged(auth, (user) => {
       if (user) {
         this.user = user;
-        this.useremail = user.useremail;
+        this.useremail = user.email;
       }
     });
   },

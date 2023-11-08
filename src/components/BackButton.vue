@@ -22,7 +22,7 @@ export default {
       if (user) {
         this.user = user;
         this.useremail = user.email;
-        console.log("Back Button auth", this.useremail);
+        // console.log("Back Button auth", this.useremail);
       }
     });
   },

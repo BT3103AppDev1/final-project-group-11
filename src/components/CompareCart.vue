@@ -23,7 +23,7 @@ export default {
       if (user) {
         this.user = user;
         this.useremail = user.email;
-        console.log("Compare cart auth", this.useremail);
+        // console.log("Compare cart auth", this.useremail);
       }
     });
   },

@@ -40,7 +40,32 @@
       </li>
     </ul>
   </div>
-  </template>
+</template>
+
+<script>
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+
+export default {
+  data() {
+    return {
+      user: false,
+      useremail: "",
+    };
+  },
+  mounted() {
+    const auth = getAuth();
+    const user = auth.currentUser;
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        this.user = user;
+        this.useremail = user.email;
+        // console.log(this.useremail);
+      }
+    });
+  },
+}
+</script>
+  
   
   <style scoped>
   .about-container {

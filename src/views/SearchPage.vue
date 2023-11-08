@@ -42,7 +42,6 @@ export default {
       };
     },
     async created() {
-      console.log("in created function");
       const auth = getAuth();
       const user = auth.currentUser;
 
@@ -66,7 +65,7 @@ export default {
 
         if (!docSnap.exists()) {
           // document does not exist -> create it
-          await setDoc(userDocRef, {});
+          await setDoc(userDocRef, { WishlistItems: [] });
           // console.log("doc set with docname:", this.useremail);
         }
         // console.log("doc already exists")

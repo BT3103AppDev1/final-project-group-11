@@ -313,14 +313,33 @@
 <script>
   import Login from '@/components/Login.vue';
   import NavBar from '@/components/NavBar.vue';
+  import { getAuth, onAuthStateChanged } from "firebase/auth";
   console.log("on LandingPage")
 
   export default {
     name:"LandingPage",
     components: {
       Login,
+      NavBar,
     },
-  }
+    data() {
+    return {
+      user: false,
+      useremail: "",
+    };
+  },
+  mounted() {
+    const auth = getAuth();
+    const user = auth.currentUser;
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        this.user = user;
+        this.useremail = user.email;
+        console.log(this.useremail);
+      }
+    });
+  },
+}
   </script>
   
   <style scoped>

@@ -1,11 +1,15 @@
 <template>
-    <div class="sort-by" v-if="user">
-        <h3>Sort by...</h3>
-        <button class = "btn" style="margin: 20px;" v-on:click="sortProducts('SalesVolume')">Sales Volume</button>
-        <button class = "btn" style="margin: 20px;" v-on:click="sortProducts('Price')">Price</button>
-        <button class = "btn" style="margin: 20px;" v-on:click="sortProducts('DeliveryFee')">Delivery Fee</button>
-        <button class = "btn" style="margin: 20px;" v-on:click="sortProducts('ProductSold')">Products Sold</button>
+  <div class="sort-by" v-if="user">
+    <div class="sort-by-header">
+      <h3>Sort by...</h3>
     </div>
+    <div class="sort-by-buttons">
+      <button class="btn" v-on:click="sortProducts('SalesVolume')">Sales Volume</button>
+      <button class="btn" v-on:click="sortProducts('Price')">Price</button>
+      <button class="btn" v-on:click="sortProducts('DeliveryFee')">Delivery Fee</button>
+      <button class="btn" v-on:click="sortProducts('ProductSold')">Products Sold</button>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -75,22 +79,35 @@ export default {
 </script>
 
 <style scoped>
-  .sort-by{
-    text-align:left;
+  .sort-by {
+    text-align: left;
     padding: 25px;
+    max-width: 50%;
   }
-.btn{
-    text-align: center; 
-    color: black; 
+
+  .sort-by-header {
+    text-align: left;
+  }
+
+  .sort-by-buttons {
+    display: flex;
+    justify-content: space-between; /* Arrange buttons horizontally with space between */
+  
+  }
+
+  .btn {
+    color: black;
     background-color: pink;
-    font-size: 20px; 
-    font-family: Arial, Helvetica, sans-serif; 
-    font-weight: 500; 
+    font-size: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 500;
     word-wrap: break-word;
     border-radius: 8px;
+    flex: 1; /* Distribute available space evenly among buttons */
+    margin: 5px; /* Add margin between buttons as needed */
   }
+
   h3 {
     font-size: 30px;
   }
-
 </style>

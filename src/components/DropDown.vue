@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="dropdown" v-if="user">
     <br><br><br>
     <br><br>
     <form name="form1" id="form1" action="/action_page.php">
@@ -29,6 +29,7 @@ import { getDownloadURL, getStorage, uploadBytes } from "firebase/storage";
 import { query, where } from 'firebase/firestore';
 import { db } from '../firebase';
 import { ref } from 'vue';
+import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
 
 const productsCollection = collection(db, 'products');
 export default {
@@ -37,6 +38,8 @@ export default {
   },
   data() {
     return {
+      user: false,
+      useremail: "",
       selectedProduct: "",
       productObject: {
         "Water Bottle": [
@@ -74,7 +77,17 @@ export default {
       queriedProducts: [],
     };
   },
-
+  mounted() {
+    const auth = getAuth();
+    const user = auth.currentUser;
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        this.user = user;
+        this.useremail = user.email;
+        // console.log(this.useremail);
+      }
+    });
+  },
   methods: {
     onProductChange() {
       this.selectedSubcategory = "";
