@@ -1,5 +1,5 @@
 <template>
-    <div style="text-align:center;">
+    <div style="text-align:center;" v-if!="user">
         <div id= "firebaseui-auth-container"></div>
     </div>
 </template>

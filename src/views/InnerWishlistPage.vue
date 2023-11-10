@@ -27,7 +27,6 @@
     <div class="price-tracker">
       <PriceTracker />
     </div>
-  -->
 
   <div id="products-title">
       <Header headerText="Products" />

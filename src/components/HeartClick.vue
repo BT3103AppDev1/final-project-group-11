@@ -7,7 +7,7 @@
     <span
       class="material-symbols-outlined"
       alt = "Add to Wishlist"
-      :class="{ 'red-icon': isClicked }"
+      :class="{ 'red-icon': isProductInWishlist }"
       @click="addToWishlist"
     >
       favorite
@@ -34,11 +34,13 @@ export default {
       // Use the documentName and useremail
       // Check if the product already exists in the wishlist
       // Show an alert if it does, otherwise add it to the array
+      // console.log("wishlistRef:", wishlistRef)
+      // console.log("isProductInWishlist", this.isProductInWishlist)
+
       const auth = getAuth();
       const user = auth.currentUser;
       const useremail = user.email;
       const wishlistRef = doc(db, "wishlist", useremail);
-      // console.log("wishlistRef:", wishlistRef)
 
       getDoc(wishlistRef)
         .then((docSnapshot) => {
@@ -51,8 +53,9 @@ export default {
                 if (wishlistData.WishlistItems) {
                 // Check if the product already exists in the wishlist array
                     if (wishlistData.WishlistItems.includes(this.documentName)) {
-                    alert("Product already exists in the wishlist.");
-                    return;
+                      this.isProductInWishlist = wishlistData.WishlistItems.includes(this.documentName);
+                      alert("Product already exists in the wishlist.");
+                      return;
                     }
 
                     // If it doesn't exist, add it to the array
@@ -65,9 +68,11 @@ export default {
                 // Update the Firestore document with the modified wishlist data
                 setDoc(wishlistRef, wishlistData)
                 .then(() => {
+                    this.isProductInWishlist = wishlistData.WishlistItems.includes(this.documentName);
+                    // console.log("setDoc", this.isProductInWishlist);
                     alert("Product added to the wishlist.");
                     this.toggleIsClicked(); // Turn the heart red after adding to wishlist
-                    console.log("WishlistItems after product added:", wishlistData.WishlistItems)
+                    // console.log("WishlistItems after product added:", wishlistData.WishlistItems)
                 })
                 .catch((error) => {
                     console.error("Error adding product to wishlist:", error);
@@ -93,8 +98,9 @@ export default {
     return {
       user: false,
       useremail: "",
-      documentName: "Birthday-9",
-      isClicked: false, 
+      documentName: "Birthday-11",
+      // isClicked: false, 
+      isProductInWishlist: false,
     };
   },
   mounted() {
@@ -105,6 +111,21 @@ export default {
         this.user = user;
         this.useremail = user.email;
         // console.log(this.useremail);
+        // Check if the product is already in the wishlist upon component mount
+        const wishlistRef = doc(db, "wishlist", this.useremail);
+        getDoc(wishlistRef)
+          .then((docSnapshot) => {
+            if (docSnapshot.exists()) {
+              const wishlistData = docSnapshot.data();
+              if (wishlistData.WishlistItems) {
+                this.isProductInWishlist = wishlistData.WishlistItems.includes(this.documentName);
+                // console.log(this.documentName + " " + this.isProductInWishlist)
+              }
+            }
+          })
+          .catch((error) => {
+            console.error("Error checking wishlist data:", error);
+          });
       }
     });
   },
