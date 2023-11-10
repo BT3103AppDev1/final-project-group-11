@@ -9,6 +9,13 @@
       <button class="btn" v-on:click="sortProducts('DeliveryFee')">Delivery Fee</button>
       <button class="btn" v-on:click="sortProducts('ProductSold')">Products Sold</button>
     </div>
+    <div>
+      <div class="pink-box">
+        <div class="products" v-for="product in queriedProducts" :key="product.id">
+          <Product :product="product"/>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -19,9 +26,13 @@ import firebase from '../firebase'
 import firebaseApp from '../firebase'
 import {db} from '../firebase'
 import { collection, getDocs, doc, deleteDoc, getFirestore } from "firebase/firestore";
+import Product from '../components/Product.vue';
 const itemsRef = collection(db, "products");
 
 export default {
+    components: {
+      Product,
+    },
     props: {
       queriedProducts: Array,
     },
@@ -84,20 +95,20 @@ export default {
     padding: 25px;
     max-width: 50%;
   }
-
   .sort-by-header {
     text-align: left;
   }
-
   .sort-by-buttons {
     display: flex;
     justify-content: space-between; /* Arrange buttons horizontally with space between */
   
   }
-
   .btn {
     color: black;
-    background-color: pink;
+    background-color: lightsalmon;
+    font-size: 20px; 
+    font-family: Arial, Helvetica, sans-serif; 
+    font-weight: 500; 
     font-size: 20px;
     font-family: Arial, Helvetica, sans-serif;
     font-weight: 500;
@@ -106,8 +117,18 @@ export default {
     flex: 1; /* Distribute available space evenly among buttons */
     margin: 5px; /* Add margin between buttons as needed */
   }
-
   h3 {
     font-size: 30px;
+  }  
+  .pink-box{
+  width: 1200px;
+  height: 500px;
+  background: rgb(255, 204, 183);
+  display: flex;
+  overflow-y: scroll;
+  justify-content: flex-start;
+  flex-direction: row;
+  align-items: flex-start;
+  flex-wrap:wrap;
   }
 </style>

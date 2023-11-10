@@ -1,18 +1,25 @@
 <template>
     <div class = "item-box" v-if="user">
-        <br><br>
-        <img src = "https://contents.mediadecathlon.com/p1800013/5e3f2384cc33d5d67b7be56df9bcf7b6/p1800013.jpg" class = "image-fit">
-        <div class="inner-text">
-            <h3 style="text-align: left;"> $7 </h3>
-            <h4> Shipped from Singapore </h4>
-            <h4> Sold on Amazon </h4>
-        </div>
+      <br><br>
+      <!-- <img :src="product.Picture" class="image-fit"> -->
+      <div class="inner-text" @click="openSourceURL">
+          <h2 style="text-align: left;"> Price: {{ product.Price }} </h2>
+          <br>
+          <h4> Source: {{product.Source}} </h4>
+          <h4> Product Reviews: {{product.ProductReviews}} </h4>
+          <h4> Products Sold: {{product.ProductSold}} </h4>
+      </div>
     </div>
 </template>
 
 <script>
+import { addDoc, collection, doc, getDoc, getDocs, getFirestore, setDoc} from "firebase/firestore";
+import SortBy from '../components/SortBy.vue'
+import { getDownloadURL, getStorage, ref } from "firebase/storage";
+import { query, where } from 'firebase/firestore';
+import { db } from '../firebase';
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-
+const storage = getStorage();
 export default {
   name: 'Product',
   data() {
@@ -20,6 +27,19 @@ export default {
       user: false,
       useremail: "",
     };
+  },
+  props: {
+    product: Object,
+  },
+  methods: {
+    openSourceURL() {
+      if (this.product.sourceURL) {
+        window.open('https://' + this.product.sourceURL, '_blank');
+      }
+    },
+    goToFolder() {
+      return this.$router.push('WishlistPage');
+    },
   },
   mounted() {
     const auth = getAuth();
@@ -43,14 +63,13 @@ export default {
   height: 400px;
   padding: 25px;
   margin: 25px;
-  background: white;
+  background: whitesmoke;
   display: inline-block;
   align-items: flex-start;
   }
   .image-fit{
-  height: 50%;
-  width: 50%;
+  width: 50%; 
+  height: 50%; 
   object-fit: cover;
   }
-
 </style>
