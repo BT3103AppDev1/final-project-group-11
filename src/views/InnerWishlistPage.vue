@@ -1,21 +1,12 @@
 <template>
- 
   <div class="inner-wishlist-page" v-if="user">
-<<<<<<< HEAD
-    <NavBar/>
-    <SortBy/>
-    
-=======
     <div class="title">
-      <BackButton />
-      <CompareCart />
-      <HomeButton />
+        <NavBar />
     </div>
 
     <div class="sort-by-buttons">
       <SortBy :queriedProducts="queriedProducts" />
     </div>
->>>>>>> 9446cb4 (Edited innerwishlist page)
 
 
     <div class="wishlist-pink-box">
@@ -71,10 +62,10 @@
 </style>
   
 <script>
-  // import BackButton from '../components/BackButton.vue' 
-  // import CompareCart from '../components/CompareCart.vue'
-  // import HomeButton from '../components/HomeButton.vue'
-  // import LogoutButton from '../components/LogoutButton.vue'
+  import BackButton from '../components/BackButton.vue' 
+  import CompareCart from '../components/CompareCart.vue'
+  import HomeButton from '../components/HomeButton.vue'
+  import LogoutButton from '../components/LogoutButton.vue'
   import SortBy from '../components/SortBy.vue'
   import Product from '../components/Product.vue'
 //import RecommendedProducts from '../components/RecommendedProducts.vue'
@@ -85,22 +76,18 @@
   import {getAuth, onAuthStateChanged} from "firebase/auth";
   import Header from '@/components/HeaderTitle.vue';
   import HeartClick from '@/components/HeartClick.vue';
-<<<<<<< HEAD
-  import NavBar from '@/components/NavBar.vue';
-=======
   import { addDoc, collection, doc, getDoc, getDocs, getFirestore, setDoc, query, where} from "firebase/firestore";
   import { db } from '../firebase';
 
   const productsCollection = collection(db, 'products');
->>>>>>> 9446cb4 (Edited innerwishlist page)
 
   export default {
     name: "InnerWishlistPage",
     components: {
-      // BackButton,
-      // CompareCart,
-      // HomeButton,
-      // LogoutButton,
+      BackButton,
+      CompareCart,
+      HomeButton,
+      LogoutButton,
       SortBy,
       Product,
       // RecommendedProducts,
@@ -108,19 +95,14 @@
       SearchBar,
       Header,
       HeartClick,
-      NavBar,
     },
     data() {
       return {
         // wishlistProducts: [],
         user: false,
         useremail: "",
-<<<<<<< HEAD
-        
-=======
         folderName: this.$route.params.folderName,
         queriedProducts: [],
->>>>>>> 9446cb4 (Edited innerwishlist page)
       }
     },
     mounted() {
@@ -129,16 +111,12 @@
         if (user) {
           this.user = user;
           this.useremail = user.email;
-<<<<<<< HEAD
-          
-=======
 
           // Use an IIFE to create an asynchronous context
           (async () => {
           // Fetch queried products immediately upon loading the page
           await this.fetchQueriedProducts();
         })();
->>>>>>> 9446cb4 (Edited innerwishlist page)
       }
     });
     // this.folderName = this.$route.params.folderName;

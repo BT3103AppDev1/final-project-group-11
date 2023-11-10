@@ -107,7 +107,6 @@ export default {
         console.log("Selected Subcategory: " + this.selectedSubcategory);
 
         let q = query(productsCollection);
-        console.log(q)
 
         if (this.selectedProduct) {
           q = query(productsCollection, where('ProductCategory', '==', this.selectedProduct));

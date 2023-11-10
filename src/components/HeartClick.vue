@@ -98,7 +98,7 @@ export default {
     return {
       user: false,
       useremail: "",
-      documentName: "Birthday-11",
+      documentName: "Waterbottle-11",
       // isClicked: false, 
       isProductInWishlist: false,
     };
