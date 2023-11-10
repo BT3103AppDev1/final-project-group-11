@@ -7,7 +7,7 @@ import Register from "@/views/Register.vue";
 import SearchPage from "@/views/SearchPage.vue";
 import WishlistPage from "@/views/WishlistPage.vue";
 import InnerWishlistPage from "@/views/InnerWishlistPage.vue";
-import PriceTracker from "@/views/PriceTracker.vue";
+
 
 const routes = [
   {
@@ -54,11 +54,6 @@ const routes = [
     path: "/InnerWishlistPage",
     name: "InnerWishlist",
     component: InnerWishlistPage,
-  },
-  {
-    path: "/pricetracker",
-    name: "PriceTracker",
-    component: PriceTracker,
   },
 ];
 

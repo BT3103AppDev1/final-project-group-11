@@ -23,12 +23,13 @@
       <RecommendedProducts :wishlistProducts="wishlistProducts" :queriedProducts="queriedProducts" />
     </div>
 
+    <!--
     <div class="price-tracker">
       <PriceTracker />
     </div>
   -->
 
-    <div id="products-title">
+  <div id="products-title">
       <Header headerText="Products" />
     </div>
 
