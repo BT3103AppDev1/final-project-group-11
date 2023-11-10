@@ -1,6 +1,6 @@
 <template>
     <div class = "item-box" v-if="user">
-      <HeartClick/>
+      <HeartClick :documentName="product.DocumentName" />
       <br><br>
       <div class="image-container" @click="openSourceURL">
         <img :src="imagePath" class="image-fit">
@@ -9,6 +9,7 @@
         </div>
       </div>
       <div class="inner-text">
+          <h2 style="text-align: left;"> Name: {{ product.DocumentName }} </h2>
           <h2 style="text-align: left;"> Price: {{ product.Price }} </h2>
           <br>
           <h4> Source: {{product.Source}} </h4>
