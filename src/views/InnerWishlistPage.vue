@@ -1,15 +1,9 @@
 <template>
+ 
   <div class="inner-wishlist-page" v-if="user">
-    <div class="title">
-      <BackButton />
-      <CompareCart />
-      <HomeButton />
-      <LogoutButton />
-    </div>
-
-    <div class="sort-by-buttons">
-      <SortBy />
-    </div>
+    <NavBar/>
+    <SortBy/>
+    
 
     <div class="wishlist-pink-box">
       <!-- Add a section for wishlist products using a loop (v-for) -->
@@ -62,10 +56,10 @@
 </style>
   
 <script>
-  import BackButton from '../components/BackButton.vue' 
-  import CompareCart from '../components/CompareCart.vue'
-  import HomeButton from '../components/HomeButton.vue'
-  import LogoutButton from '../components/LogoutButton.vue'
+  // import BackButton from '../components/BackButton.vue' 
+  // import CompareCart from '../components/CompareCart.vue'
+  // import HomeButton from '../components/HomeButton.vue'
+  // import LogoutButton from '../components/LogoutButton.vue'
   import SortBy from '../components/SortBy.vue'
   import Product from '../components/Product.vue'
 //import RecommendedProducts from '../components/RecommendedProducts.vue'
@@ -76,14 +70,15 @@
   import {getAuth, onAuthStateChanged} from "firebase/auth";
   import Header from '@/components/HeaderTitle.vue';
   import HeartClick from '@/components/HeartClick.vue';
+  import NavBar from '@/components/NavBar.vue';
 
   export default {
     name: "InnerWishlistPage",
     components: {
-      BackButton,
-      CompareCart,
-      HomeButton,
-      LogoutButton,
+      // BackButton,
+      // CompareCart,
+      // HomeButton,
+      // LogoutButton,
       SortBy,
       Product,
       // RecommendedProducts,
@@ -91,12 +86,14 @@
       SearchBar,
       Header,
       HeartClick,
+      NavBar,
     },
     data() {
       return {
         wishlistProducts: [],
         user:false,
         useremail: "",
+        
       }
     },
     mounted() {
@@ -105,6 +102,7 @@
         if (user) {
           this.user = user;
           this.useremail = user.email;
+          
       }
     })
     const folderName = this.$route.params.folderName;

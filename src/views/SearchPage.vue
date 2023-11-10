@@ -1,18 +1,13 @@
 <template>
   <div class="search-page" v-if="user">
-    <BackButton/>
-    <CompareCart/>
-    <HomeButton/>
-    <LogOutButton/>
+    <NavBar />
     <DropDown/>
   </div>
+
 </template>
 
 <script>
-import BackButton from '../components/BackButton.vue' 
-import CompareCart from '../components/CompareCart.vue'
-import HomeButton from '../components/HomeButton.vue'
-import LogoutButton from '../components/LogoutButton.vue'
+
 import Header from '../components/HeaderTitle.vue'
 import DropDown from '../components/DropDown.vue'
 import Product from '../components/Product.vue'
@@ -21,18 +16,16 @@ import firebaseApp from '../firebase.js';
 import {getAuth, onAuthStateChanged} from "firebase/auth";
 import { getFirestore, doc, getDoc, setDoc } from 'firebase/firestore';
 import { db } from '../firebase.js';
+import NavBar from '@/components/NavBar.vue';
 
 // console.log("SearchPage db", db);
 
 export default {
     name:"SearchPage",
     components: {
-      BackButton,
-      CompareCart,
-      HomeButton,
-      LogoutButton,
       Product,
-      DropDown
+      DropDown,
+      NavBar,
     },
     data(){
       return{
