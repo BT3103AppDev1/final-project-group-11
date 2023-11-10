@@ -5,7 +5,6 @@
     <HomeButton/>
     <LogOutButton/>
     <DropDown/>
-    <div class="pink-box"></div>
   </div>
 </template>
 
@@ -81,13 +80,7 @@ export default {
   h1{
     display:inline-block;
   }
-  .pink-box{
-  width: 1250px;
-  height: 500px;
-  background: rgba(255, 192, 203, 0.769);
-  display: inline-block;
-  overflow-y: scroll;
-  }
+
 
 </style>
 
