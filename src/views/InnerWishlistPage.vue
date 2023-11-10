@@ -35,7 +35,6 @@
     <div id="recommended-title">
       <Header headerText="Recomended Product" />
     </div>
-  </div> -->
   </div>
 </template>
 

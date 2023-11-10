@@ -3,14 +3,13 @@ import firebase from 'firebase/compat/app';
 // Use your accounts config
 
 const firebaseConfig = {
-    apiKey: "AIzaSyDO59NiVbKhH-TtZ5KuIxgbHrXrJx7nouw",
-    authDomain: "bt3103-group-project-53928.firebaseapp.com",
-    projectId: "bt3103-group-project-53928",
-    storageBucket: "bt3103-group-project-53928.appspot.com",
-    messagingSenderId: "586260998655",
-    appId: "1:586260998655:web:e9a73f7e1c37969b255fca",
-    measurementId: "G-EEZZXV0W37"
-  };
+  apiKey: "AIzaSyA_ljRJJ1BgkLQV96CuKrWyBgkAc6bm4k0",
+  authDomain: "bt3103-group-proj-1.firebaseapp.com",
+  projectId: "bt3103-group-proj-1",
+  storageBucket: "bt3103-group-proj-1.appspot.com",
+  messagingSenderId: "175015674518",
+  appId: "1:175015674518:web:0ee7b8e6701985fca738b7"
+};
 
 firebase.initializeApp(firebaseConfig);
 

@@ -1,5 +1,6 @@
    <template>
     <NavBar/>
+    <Login />
     <div class="landing-page">
       <header>
         <h1>Welcome to Compare Cart</h1>
@@ -27,10 +28,16 @@
         </router-link>
       </section>
     </div>
-  </template>
+</template>
 
-  <script>
+<script>
+  import NavBar from '@/components/NavBar.vue' 
+  import Login from '@/components/Login.vue'
   export default {
+    components: {
+      NavBar,
+      Login,
+    }
     // need to complete logic 
   };
   </script>
