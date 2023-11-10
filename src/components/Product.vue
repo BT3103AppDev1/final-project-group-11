@@ -1,8 +1,14 @@
 <template>
     <div class = "item-box" v-if="user">
+      <HeartClick/>
       <br><br>
-      <!-- <img :src="product.Picture" class="image-fit"> -->
-      <div class="inner-text" @click="openSourceURL">
+      <div class="image-container" @click="openSourceURL">
+        <img :src="imagePath" class="image-fit">
+        <div class="overlay">
+          <div class="text">Click to navigate to source URL</div>
+        </div>
+      </div>
+      <div class="inner-text">
           <h2 style="text-align: left;"> Price: {{ product.Price }} </h2>
           <br>
           <h4> Source: {{product.Source}} </h4>
@@ -18,6 +24,7 @@
 
 <script>
 import { addDoc, collection, doc, getDoc, getDocs, getFirestore, setDoc} from "firebase/firestore";
+import HeartClick from '../components/HeartClick.vue'
 import SortBy from '../components/SortBy.vue'
 import { getDownloadURL, getStorage, ref } from "firebase/storage";
 import { query, where } from 'firebase/firestore';
@@ -29,7 +36,8 @@ const storage = getStorage();
 export default {
   name: 'Product',
   components: {
-    PriceTracker
+    PriceTracker,
+    HeartClick
   },
   data() {
     return {
@@ -40,6 +48,28 @@ export default {
   },
   props: {
     product: Object,
+  },
+  // Inside your Vue component
+  computed: {
+    imagePath() {
+      // Replace 'category1', 'category2', etc., with the actual category values you have in your data
+      const categoryPaths = {
+        "Waterbottle": "src/assets/products/waterbottle.png",
+        "Birthday": "src/assets/products/birthday.png",
+        "Dog Products": "src/assets/products/dog-products.png",
+        "Electronics": "src/assets/products/electronics.png",
+        "Fashion": "src/assets/products/fashion.png",
+        "Home and Kitchen": "src/assets/products/home-and-kitchen.png",
+        "Beauty and Personal Care": "src/assets/products/beauty-and-personal-care.png",
+        "Sports and Outdoors": "src/assets/products/sports-and-outdoors.png",
+        "Books and Media": "src/assets/products/books-and-media.png",
+        "Toys and Games": "src/assets/products/toys-and-games.png",
+        // Add more categories as needed
+      };
+      const category = this.product.ProductCategory;
+
+      return categoryPaths[category];
+    },
   },
   methods: {
     
@@ -74,18 +104,55 @@ export default {
 
 <style scoped>
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@1,900&display=swap');
-  .item-box {
+.item-box {
   width: 250px;
-  height: 400px;
+  height: 500px;
   padding: 25px;
   margin: 25px;
   background: whitesmoke;
   display: inline-block;
   align-items: flex-start;
-  }
-  .image-fit{
-  width: 50%; 
-  height: 50%; 
-  object-fit: cover;
-  }
+  position: relative;
+}
+
+.image-container {
+  position: relative;
+  cursor: pointer;
+}
+
+.image-fit {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  height: 100px;
+  width: 150px;
+  object-fit: scale-down;
+}
+
+.overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(255, 153, 112, 0.8); /* Use rgba for transparency */
+  overflow: hidden;
+  height: 0;
+  transition: .5s ease;
+}
+
+.image-container:hover .overlay {
+  height: 100%;
+}
+
+.text {
+  white-space: wrap;
+  color: rgb(11, 64, 34);
+  font-size: 15px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+}
 </style>
+
