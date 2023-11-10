@@ -9,6 +9,10 @@
           <h4> Product Reviews: {{product.ProductReviews}} </h4>
           <h4> Products Sold: {{product.ProductSold}} </h4>
       </div>
+      <button @click="openPriceTracker">View Price History</button>
+      <!-- Display the PriceTracker component when showPriceTracker is true -->
+      
+      <PriceTracker v-if="showPriceTracker" :PreviousPrices= product.PreviousPrices />
     </div>
 </template>
 
@@ -19,24 +23,36 @@ import { getDownloadURL, getStorage, ref } from "firebase/storage";
 import { query, where } from 'firebase/firestore';
 import { db } from '../firebase';
 import { getAuth, onAuthStateChanged } from "firebase/auth";
+import PriceTracker from "@/components/PriceTracker.vue";
+
 const storage = getStorage();
 export default {
   name: 'Product',
+  components: {
+    PriceTracker
+  },
   data() {
     return {
       user: false,
       useremail: "",
+      showPriceTracker: false, 
     };
   },
   props: {
     product: Object,
   },
   methods: {
+    
     openSourceURL() {
       if (this.product.sourceURL) {
         window.open('https://' + this.product.sourceURL, '_blank');
       }
     },
+    openPriceTracker() {
+      // Toggle the value of showPriceTracker to display/hide the PriceTracker component
+      this.showPriceTracker = !this.showPriceTracker;
+    },
+
     goToFolder() {
       return this.$router.push('WishlistPage');
     },
