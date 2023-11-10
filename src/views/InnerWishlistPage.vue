@@ -1,9 +1,22 @@
 <template>
  
   <div class="inner-wishlist-page" v-if="user">
+<<<<<<< HEAD
     <NavBar/>
     <SortBy/>
     
+=======
+    <div class="title">
+      <BackButton />
+      <CompareCart />
+      <HomeButton />
+    </div>
+
+    <div class="sort-by-buttons">
+      <SortBy :queriedProducts="queriedProducts" />
+    </div>
+>>>>>>> 9446cb4 (Edited innerwishlist page)
+
 
     <div class="wishlist-pink-box">
       <!-- Add a section for wishlist products using a loop (v-for) -->
@@ -21,6 +34,8 @@
     <div class="price-tracker">
       <PriceTracker />
     </div>
+    -->
+    <HeartClick />
 
   <div id="products-title">
       <Header headerText="Products" />
@@ -70,7 +85,14 @@
   import {getAuth, onAuthStateChanged} from "firebase/auth";
   import Header from '@/components/HeaderTitle.vue';
   import HeartClick from '@/components/HeartClick.vue';
+<<<<<<< HEAD
   import NavBar from '@/components/NavBar.vue';
+=======
+  import { addDoc, collection, doc, getDoc, getDocs, getFirestore, setDoc, query, where} from "firebase/firestore";
+  import { db } from '../firebase';
+
+  const productsCollection = collection(db, 'products');
+>>>>>>> 9446cb4 (Edited innerwishlist page)
 
   export default {
     name: "InnerWishlistPage",
@@ -90,10 +112,15 @@
     },
     data() {
       return {
-        wishlistProducts: [],
-        user:false,
+        // wishlistProducts: [],
+        user: false,
         useremail: "",
+<<<<<<< HEAD
         
+=======
+        folderName: this.$route.params.folderName,
+        queriedProducts: [],
+>>>>>>> 9446cb4 (Edited innerwishlist page)
       }
     },
     mounted() {
@@ -102,10 +129,19 @@
         if (user) {
           this.user = user;
           this.useremail = user.email;
+<<<<<<< HEAD
           
+=======
+
+          // Use an IIFE to create an asynchronous context
+          (async () => {
+          // Fetch queried products immediately upon loading the page
+          await this.fetchQueriedProducts();
+        })();
+>>>>>>> 9446cb4 (Edited innerwishlist page)
       }
-    })
-    const folderName = this.$route.params.folderName;
+    });
+    // this.folderName = this.$route.params.folderName;
     },
 
     async created() {
@@ -119,7 +155,74 @@
 
       // fetchRecommended() -> based on folderName, query product collection -> filter and
       // display product with lowest cost
+
+      async fetchQueriedProducts() {
+        // Fetch WishlistItems from the user's wishlist
+        const wishlistRef = doc(db, "wishlist", this.useremail);
+        // console.log("wishlistRef", wishlistRef)
+        const wishlistDoc = await getDoc(wishlistRef);
+
+        if (wishlistDoc.exists()) {
+          const wishlistData = wishlistDoc.data();
+          // console.log("wishlistData", wishlistData)
+          const wishlistItems = wishlistData.WishlistItems || [];
+          //console.log("wishlistItems", wishlistItems)
+
+            // Fetch the products that match the WishlistItems and productCategory
+          const q = query(
+            collection(db, "products"),
+            where("DocumentName", "in", wishlistItems),
+            where("ProductCategory", "==", this.folderName)
+          ); 
+
+          /* const wishlistItemDocs = await getDocs(collection(db, "products"));
+          const matchingDocs = wishlistItemDocs.docs.filter(doc => wishlistItems.includes(doc.id));
+          const filteredDocs = matchingDocs.filter(doc => doc.data().productCategory === this.folderName);
+          console.log("filteredDocs", filteredDocs) */
+          ///////////////////
+
+          // Execute the query
+          const querySnapshot = await getDocs(q);
+
+          console.log(querySnapshot)
+
+          this.queriedProducts = []; // Clear the array before populating it
+
+          querySnapshot.forEach((doc) => {
+          // Populate the queriedProducts array with the query results
+          this.queriedProducts.push(doc.data());
+          });
+          console.log(this.queriedProducts[0]);
+/*
+          querySnapshot.forEach((doc) => {
+          // Populate the queriedProducts array with the query results
+          this.queriedProducts.push(doc.data());
+          // this.queriedProducts = filteredDocs.map(doc => doc.data()); 
+          // Create a query for documents in productsCollection
+         const q = query(productsCollection);
+
+         // Fetch documents where the document ID is in wishlistItems
+         const wishlistItemDocs = await getDocs(q);
+         const matchingDocs = wishlistItemDocs.docs.filter(doc => wishlistItems.includes(doc.id));
+          // Log or inspect the fields of each document
+          matchingDocs.forEach(doc => {
+            const data = doc.data();
+            console.log(`Document ID: ${doc.id}, Data:`, data);
+          });
+
+        // Filter documents based on productCategory and populate queriedProducts
+        this.queriedProducts = matchingDocs
+          .filter(doc => doc.data().productCategory === this.folderName)
+          .map(doc => doc.data()); */
+        
+        console.log("queriedProducts after filtering", this.queriedProducts)
+
+        } else {
+          console.log('error...');
+          return [];
+        }
+        console.log(this.queriedProducts)
+      }
     }
-  };
+  }
 </script>
-  
