@@ -107,7 +107,7 @@ export default {
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@1,900&display=swap');
 .item-box {
   width: 250px;
-  height: 500px;
+  height: 570px;
   padding: 25px;
   margin: 25px;
   background: whitesmoke;
