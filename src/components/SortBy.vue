@@ -7,7 +7,6 @@
       <button class="btn" v-on:click="sortProducts('SalesVolume')">Sales Volume</button>
       <button class="btn" v-on:click="sortProducts('Price')">Price</button>
       <button class="btn" v-on:click="sortProducts('DeliveryFee')">Delivery Fee</button>
-      <button class="btn" v-on:click="sortProducts('ProductSold')">Products Sold</button>
     </div>
     <br><br>
     <h3> Products: </h3>
@@ -52,7 +51,7 @@ export default {
         if (option === "SalesVolume") {
           this.queriedProducts.sort((productA, productB) => {
             // Sort by price in ascending order
-            return productA.ProductSold - productB.ProductSold;
+            return productB.ProductSold - productA.ProductSold;
           });
         } else if (option === "Price") {
           this.queriedProducts.sort((productA, productB) => {
@@ -63,11 +62,6 @@ export default {
           this.queriedProducts.sort((productA, productB) => {
             // Sort in descending order, highest rating first
             return productB.DeliveryFee - productA.DeliveryFee;
-          });
-        } else if (option === "ProductSold") {
-          this.queriedProducts.sort((productA, productB) => {
-            // Sort in descending order, highest rating first
-            return productB.ProductSold - productA.ProductSold;
           });
         }
       }
@@ -103,8 +97,7 @@ export default {
   }
   .sort-by-buttons {
     display: flex;
-    justify-content: space-between; /* Arrange buttons horizontally with space between */
-  
+    justify-content: space-around; /* Arrange buttons horizontally with space between */
   }
   .btn {
     color: black;
@@ -127,7 +120,7 @@ export default {
   .pink-box{
   width: 1200px;
   height: 500px;
-  background: rgb(255, 204, 183);
+  background: white;
   display: flex;
   overflow-y: scroll;
   justify-content: flex-start;

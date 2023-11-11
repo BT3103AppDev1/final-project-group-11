@@ -1,7 +1,6 @@
 <template>
     <div class = "item-box" v-if="user">
       <HeartClick :documentName="product.DocumentName" />
-      <br><br>
       <div class="image-container" @click="openSourceURL">
         <img :src="imagePath" class="image-fit">
         <div class="overlay">
@@ -15,6 +14,7 @@
           <h4> Source: {{product.Source}} </h4>
           <h4> Product Reviews: {{product.ProductReviews}} </h4>
           <h4> Products Sold: {{product.ProductSold}} </h4>
+          <h4> Delivery Fee: {{product.DeliveryFee}} </h4>
       </div>
       <button @click="openPriceTracker">View Price History</button>
       <!-- Display the PriceTracker component when showPriceTracker is true -->
@@ -107,13 +107,15 @@ export default {
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@1,900&display=swap');
 .item-box {
   width: 250px;
-  height: 570px;
+  height: 550px;
   padding: 25px;
   margin: 25px;
   background: whitesmoke;
   display: inline-block;
   align-items: flex-start;
   position: relative;
+  outline-color: lightsalmon;
+  outline-style: solid;
 }
 
 .image-container {
@@ -146,6 +148,9 @@ export default {
 }
 h3{
   font-size: 20px;
+}
+h4{
+  font-size: 13px;
 }
 
 .text {
