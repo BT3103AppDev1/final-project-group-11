@@ -9,14 +9,14 @@
       <section>
         <h2>Discover Our Products</h2>
         <p>Explore our wide range of high-quality products at great prices.</p>
-        <router-link to="/products">
+        <router-link to="/SearchPage">
           <button>View Products</button>
         </router-link>
       </section>
       <section>
         <h2>About Us</h2>
         <p>Learn about our mission and commitment to customer satisfaction.</p>
-        <router-link to="/about">
+        <router-link to="/About">
           <button>About Us</button>
         </router-link>
       </section>
@@ -33,12 +33,11 @@
 <script>
 
   import Login from '@/components/Login.vue'
-  import NavBar_Before from '../components/NavBar_Before.vue';
   export default {
     components: {
-    Login,
-    NavBar_Before,
-}
+      NavBar,
+      Login,
+    }
     // need to complete logic 
   };
   </script>
