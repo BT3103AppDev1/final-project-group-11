@@ -1,10 +1,9 @@
    <template>
-    <NavBar_Before/>
-    <Login />
     <div class="landing-page">
       <header>
         <h1>Welcome to Compare Cart</h1>
         <p>Your go-to source for amazing products.</p>
+        <Login/>
       </header>
       <section>
         <h2>Discover Our Products</h2>
@@ -35,27 +34,23 @@
   import Login from '@/components/Login.vue'
   export default {
     components: {
-      NavBar,
       Login,
     }
-    // need to complete logic 
+  
   };
   </script>
 
   <style scoped>
   .landing-page {
-    /* display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    min-height: 100vh; */
-    padding-top: 200px;  
+
+    padding: 50px; 
+    padding-right: 300px; 
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
+    position:relative;
     
   }
   
@@ -94,5 +89,6 @@
   button:hover {
     background-color: lightsalmon;
   }
+
   </style>
   

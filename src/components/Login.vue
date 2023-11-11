@@ -1,5 +1,6 @@
 <template>
-    <div style="text-align:center;">
+    <div class="login-container">
+        <h2>Login</h2>
         <div id= "firebaseui-auth-container"></div>
     </div>
 </template>
@@ -34,11 +35,27 @@ export default {
 </script>
 
 <style scoped>
+.login-container {
+  background-color: #f0f0f0;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 300px;
+  height: 210px;
+  margin-top: 20px;
+}
+
+h2 {
+  color: lightsalmon;
+  font-size: 1.5rem;
+  /* margin-bottom: 20px; */
+}
 #firebaseui-auth-container{
     position: absolute;
     left: 8%;
-    margin-top: 50px;;
-    margin-bottom: 50px;;
+    margin-top: 5px;;
+    margin-bottom: 50px;
+    margin-left: 350px;
 }
 
 </style>

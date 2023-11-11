@@ -1,10 +1,6 @@
 
-<!-- JUST TO SEE IF NavBar works -->
+
 <template>
-  <!-- <div id="app">
-    <NavBar />
-    <router-view /> 
-  </div> -->
   <router-view/>
 </template>
 
