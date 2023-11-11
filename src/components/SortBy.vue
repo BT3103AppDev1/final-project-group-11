@@ -79,7 +79,7 @@ export default {
       if (user) {
         this.user = user;
         this.useremail = user.email;
-        console.log(this.useremail);
+        // console.log(this.useremail);
       }
     });
   },

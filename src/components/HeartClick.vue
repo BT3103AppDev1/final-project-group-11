@@ -38,6 +38,7 @@ export default {
             if (wishlistData.WishlistItems) {
               if (wishlistData.WishlistItems.includes(this.documentName)) {
                 // If the product is already in the wishlist, remove it
+                // @onClick -> toggle the values (so if already in wishlist, onClick = remove it.)
                 this.isProductInWishlist = wishlistData.WishlistItems.includes(this.documentName);
                 wishlistData.WishlistItems = wishlistData.WishlistItems.filter(item => item !== this.documentName);
               } else {
@@ -73,11 +74,12 @@ export default {
   props: {
     documentName: String,
   },
+
   data() {
     return {
       user: false,
       useremail: "",
-      isProductInWishlist: false,
+      isProductInWishlist: null,
     };
   },
 
@@ -89,13 +91,16 @@ export default {
       this.user = user;
       this.useremail = user.email;
 
-      const productRef = doc(db, "products"); 
+      // Updating isProductInWishlist onMounted
+      console.log("this.documentName", this.documentName)
+
+      const productRef = doc(db, "products", this.documentName); 
       getDoc(productRef)
         .then((productSnapshot) => {
           if (productSnapshot.exists()) {
             const productData = productSnapshot.data();
             // Update the DocumentName with the value from the product data
-            this.documentName = productData.DocumentName;
+            // this.documentName = productData.DocumentName;
 
             // Check if the product is already in the wishlist upon component mount
             const wishlistRef = doc(db, "wishlist", this.useremail);
@@ -103,8 +108,15 @@ export default {
               .then((docSnapshot) => {
                 if (docSnapshot.exists()) {
                   const wishlistData = docSnapshot.data();
+
+                  // console.log("wishlistData" + wishlistData)
+
                   if (wishlistData.WishlistItems) {
+                    // console.log("wishlistData.WishlistItems" + wishlistData.WishlistItems)
                     this.isProductInWishlist = wishlistData.WishlistItems.includes(this.documentName);
+                    // console.log("this.isProductInWishlist" + this.isProductInWishlist)
+                  } else {
+                    this.isProductInWishlist = false;
                   }
                 }
               })
@@ -113,6 +125,7 @@ export default {
               });
           } else {
             console.error("Product not found.");
+            this.isProductInWishlist = false;
           }
         })
         .catch((error) => {
