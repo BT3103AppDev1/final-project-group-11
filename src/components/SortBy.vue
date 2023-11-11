@@ -9,8 +9,11 @@
       <button class="btn" v-on:click="sortProducts('DeliveryFee')">Delivery Fee</button>
       <button class="btn" v-on:click="sortProducts('ProductSold')">Products Sold</button>
     </div>
+    <br><br>
+    <h3> Products: </h3>
     <div>
       <div class="pink-box">
+        <br><br>
         <div class="products" v-for="product in queriedProducts" :key="product.id">
           <Product :product="product"/>
         </div>
@@ -119,6 +122,7 @@ export default {
   }
   h3 {
     font-size: 30px;
+    margin: 5px;
   }  
   .pink-box{
   width: 1200px;

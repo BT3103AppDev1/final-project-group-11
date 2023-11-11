@@ -10,7 +10,7 @@
       </div>
       <div class="inner-text">
           <h2 style="text-align: left;"> Name: {{ product.DocumentName }} </h2>
-          <h2 style="text-align: left;"> Price: {{ product.Price }} </h2>
+          <h3 style="text-align: left;"> Price: {{ product.Price }} </h3>
           <br>
           <h4> Source: {{product.Source}} </h4>
           <h4> Product Reviews: {{product.ProductReviews}} </h4>
@@ -143,6 +143,9 @@ export default {
 
 .image-container:hover .overlay {
   height: 100%;
+}
+h3{
+  font-size: 20px;
 }
 
 .text {

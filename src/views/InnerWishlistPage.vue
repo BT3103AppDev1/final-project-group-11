@@ -7,17 +7,17 @@
     <div class="sort-by-buttons">
       <SortBy :queriedProducts="queriedProducts" />
     </div>
+    <!-- <div id="products-title">
+      <Header headerText="Products" />
+    </div> -->
 
-
-    <div class="wishlist-pink-box">
-      <!-- Add a section for wishlist products using a loop (v-for) -->
+    <!-- <div class="wishlist-pink-box">
       <div class="products-list">
         <Product v-for="(product, index) in wishlistProducts" :key="index" :product="product" />
       </div>
-    </div>
+    </div> -->
 
     <div class="recommended">
-      <h3>Recommended Products</h3>
       <RecommendedProducts :wishlistProducts="wishlistProducts" :queriedProducts="queriedProducts" />
     </div>
 
@@ -28,13 +28,10 @@
     -->
     <HeartClick />
 
-  <div id="products-title">
-      <Header headerText="Products" />
-    </div>
 
-    <div id="recommended-title">
+    <!-- <div id="recommended-title">
       <Header headerText="Recomended Product" />
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -47,14 +44,14 @@
     padding: 15px; /* Adjust the padding as needed */
   }
 
-  #products-title {
+  /* #products-title {
     position: absolute;
     left: 20%;
-    top: 30%;
-  }
+    top: 20%;
+  } */
 
   #recommended-title {
-    position: absolute;
+    position: relative;
     left: 20%;
     top: 70%;
   }
