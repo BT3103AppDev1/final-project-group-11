@@ -131,71 +131,36 @@
       // display product with lowest cost
 
       async fetchQueriedProducts() {
-        // Fetch WishlistItems from the user's wishlist
         const wishlistRef = doc(db, "wishlist", this.useremail);
-        // console.log("wishlistRef", wishlistRef)
         const wishlistDoc = await getDoc(wishlistRef);
 
         if (wishlistDoc.exists()) {
           const wishlistData = wishlistDoc.data();
-          // console.log("wishlistData", wishlistData)
           const wishlistItems = wishlistData.WishlistItems || [];
-          //console.log("wishlistItems", wishlistItems)
 
-            // Fetch the products that match the WishlistItems and productCategory
-          const q = query(
-            collection(db, "products"),
-            where("DocumentName", "in", wishlistItems),
-            where("ProductCategory", "==", this.folderName)
-          ); 
+          if (wishlistItems.length > 0) {
+            const q = query(
+              collection(db, "products"),
+              where("DocumentName", "in", wishlistItems),
+              where("ProductCategory", "==", this.folderName)
+            );
 
-          /* const wishlistItemDocs = await getDocs(collection(db, "products"));
-          const matchingDocs = wishlistItemDocs.docs.filter(doc => wishlistItems.includes(doc.id));
-          const filteredDocs = matchingDocs.filter(doc => doc.data().productCategory === this.folderName);
-          console.log("filteredDocs", filteredDocs) */
-          ///////////////////
+            const querySnapshot = await getDocs(q);
 
-          // Execute the query
-          const querySnapshot = await getDocs(q);
+            this.queriedProducts = []; // Clear the array before populating it
 
-          console.log(querySnapshot)
-
-          this.queriedProducts = []; // Clear the array before populating it
-
-          querySnapshot.forEach((doc) => {
-          // Populate the queriedProducts array with the query results
-          this.queriedProducts.push(doc.data());
-          });
-          console.log(this.queriedProducts[0]);
-/*
-          querySnapshot.forEach((doc) => {
-          // Populate the queriedProducts array with the query results
-          this.queriedProducts.push(doc.data());
-          // this.queriedProducts = filteredDocs.map(doc => doc.data()); 
-          // Create a query for documents in productsCollection
-         const q = query(productsCollection);
-
-         // Fetch documents where the document ID is in wishlistItems
-         const wishlistItemDocs = await getDocs(q);
-         const matchingDocs = wishlistItemDocs.docs.filter(doc => wishlistItems.includes(doc.id));
-          // Log or inspect the fields of each document
-          matchingDocs.forEach(doc => {
-            const data = doc.data();
-            console.log(`Document ID: ${doc.id}, Data:`, data);
-          });
-
-        // Filter documents based on productCategory and populate queriedProducts
-        this.queriedProducts = matchingDocs
-          .filter(doc => doc.data().productCategory === this.folderName)
-          .map(doc => doc.data()); */
-        
-        console.log("queriedProducts after filtering", this.queriedProducts)
-
+            querySnapshot.forEach((doc) => {
+              this.queriedProducts.push(doc.data());
+            });
+            console.log(this.queriedProducts[0]);
+          } else {
+            console.log("Wishlist is empty");
+            alert("Please add items into Wishlist before accessing folders");
+          }
         } else {
-          console.log('error...');
-          return [];
+          console.log("Error fetching wishlist data");
+          // Handle the case where the wishlist document doesn't exist
         }
-        console.log(this.queriedProducts)
       }
     }
   }
