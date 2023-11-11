@@ -9,14 +9,14 @@
       <section>
         <h2>Discover Our Products</h2>
         <p>Explore our wide range of high-quality products at great prices.</p>
-        <router-link to="/products">
+        <router-link to="/SearchPage">
           <button>View Products</button>
         </router-link>
       </section>
       <section>
         <h2>About Us</h2>
         <p>Learn about our mission and commitment to customer satisfaction.</p>
-        <router-link to="/about">
+        <router-link to="/About">
           <button>About Us</button>
         </router-link>
       </section>
@@ -33,13 +33,31 @@
 <script>
   import NavBar from '@/components/NavBar.vue' 
   import Login from '@/components/Login.vue'
+  import { getAuth, onAuthStateChanged } from "firebase/auth";
+
   export default {
     components: {
       NavBar,
       Login,
-    }
-    // need to complete logic 
-  };
+    },
+    data() {
+      return {
+        user: false,
+        useremail: "",
+      };
+    },
+    mounted() {
+      const auth = getAuth();
+      const user = auth.currentUser;
+      onAuthStateChanged(auth, (user) => {
+        if (user) {
+          this.user = user;
+          this.useremail = user.email;
+          console.log(this.useremail);
+        }
+      });
+    },
+  }
   </script>
 
   <style scoped>
