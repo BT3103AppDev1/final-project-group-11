@@ -31,6 +31,7 @@ export default {
 
   methods: {
     goToFolder() {
+      console.log("Heart Button Clicked")
       return this.$router.push('WishlistPage');
     },
   },

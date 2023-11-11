@@ -50,7 +50,7 @@ export default {
 
         if (option === "SalesVolume") {
           this.queriedProducts.sort((productA, productB) => {
-            // Sort by price in ascending order
+            // Sort by Sales Volume in descending order
             return productB.ProductSold - productA.ProductSold;
           });
         } else if (option === "Price") {
@@ -60,8 +60,8 @@ export default {
           });
         } else if (option === "DeliveryFee") {
           this.queriedProducts.sort((productA, productB) => {
-            // Sort in descending order, highest rating first
-            return productB.DeliveryFee - productA.DeliveryFee;
+            // Sort in ascending order
+            return productA.DeliveryFee - productB.DeliveryFee;
           });
         }
       }

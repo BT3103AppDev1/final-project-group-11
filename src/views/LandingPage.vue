@@ -23,7 +23,7 @@
       <section>
         <h2>Contact Us</h2>
         <p>Have questions or need assistance? Contact us today.</p>
-        <router-link to="/contact-us">
+        <router-link to="/ContactUs">
           <button>Contact Us</button>
         </router-link>
       </section>

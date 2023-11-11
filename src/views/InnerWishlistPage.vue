@@ -10,21 +10,29 @@
 
     <!-- <div id="products-title">
       <Header headerText="Products" />
-    </div> -->
+    </div> 
 
-      <!-- <div id="recommended-title">
+      <div id="recommended-title">
         <Header headerText="Recomended Product" />
-      </div> -->
+      </div> 
+
+      <div class="recommended-product" v-if="recommendedProduct">
+        <h3>Recommended Product</h3>
+        <Product :product="recommendedProduct" />
+      </div>
+    -->
 
     <!-- <div class="wishlist-pink-box">
       <div class="products-list">
         <Product v-for="(product, index) in wishlistProducts" :key="index" :product="product" />
       </div>
     </div> -->
-
+    
+    <!-- 
     <div class="recommended">
       <RecommendedProducts :wishlistProducts="wishlistProducts" :queriedProducts="queriedProducts" />
     </div>
+    -->
 
   </div>
 </template>
@@ -64,7 +72,8 @@
   import {getAuth, onAuthStateChanged} from "firebase/auth";
   import Header from '@/components/HeaderTitle.vue';
   import HeartClick from '@/components/HeartClick.vue';
-  import { addDoc, collection, doc, getDoc, getDocs, getFirestore, setDoc, query, where} from "firebase/firestore";
+  import { addDoc, collection, doc, getDoc, getDocs, getFirestore, setDoc, query, where, orderBy,
+  limit} from "firebase/firestore";
   import { db } from '../firebase';
   import NavBar from '../components/NavBar.vue'
 
@@ -92,6 +101,7 @@
         useremail: "",
         folderName: this.$route.params.folderName,
         queriedProducts: [],
+        recommendedProduct: null, 
       }
     },
 
@@ -106,6 +116,7 @@
           (async () => {
           // Fetch queried products immediately upon loading the page
           await this.fetchQueriedProducts();
+          await this.fetchRecommendedProduct();
           })();
         }
       });
@@ -117,7 +128,9 @@
     },
 
     methods: {
+
       async fetchQueriedProducts() {
+        console.log("this.folderName " + this.folderName)
         const wishlistRef = doc(db, "wishlist", this.useremail);
         const wishlistDoc = await getDoc(wishlistRef);
 
@@ -153,7 +166,25 @@
         } else {
           console.log("Error fetching wishlist data");
         }
-      }
+      },
+
+      async fetchRecommendedProduct() {
+        const q = query(
+          collection(db, "products"),
+          where("ProductCategory", '==', this.folderName),
+          orderBy("Price"),
+          limit(1)
+        );
+
+        const querySnapshot = await getDocs(q);
+        console.log(this.querySnapshot)
+
+        if (!querySnapshot.empty) {
+          const recommendedProductData = querySnapshot.docs[0].data();
+          this.recommendedProduct = recommendedProductData;
+          console.log("this.recommendedProduct", this.recommendedProduct)
+        }
+      },
     }
   }
 </script>

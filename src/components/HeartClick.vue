@@ -92,7 +92,7 @@ export default {
       this.useremail = user.email;
 
       // Updating isProductInWishlist onMounted
-      console.log("this.documentName", this.documentName)
+      // console.log("this.documentName", this.documentName)
 
       const productRef = doc(db, "products", this.documentName); 
       getDoc(productRef)
