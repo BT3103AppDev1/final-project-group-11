@@ -1,6 +1,6 @@
 <template>
     <div>
-      <NavBar />
+      <BackButton/>
       <div class="about-container">
         <h2 class="about-title">About CompareCart</h2>
         <p class="about-description">
@@ -44,25 +44,27 @@
 
 <script>
 import { getAuth, onAuthStateChanged } from "firebase/auth";
+import BackButton from "../components/BackButton.vue";
 
 export default {
-  data() {
-    return {
-      user: false,
-      useremail: "",
-    };
-  },
-  mounted() {
-    const auth = getAuth();
-    const user = auth.currentUser;
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        this.user = user;
-        this.useremail = user.email;
-        // console.log(this.useremail);
-      }
-    });
-  },
+    data() {
+        return {
+            user: false,
+            useremail: "",
+        };
+    },
+    mounted() {
+        const auth = getAuth();
+        const user = auth.currentUser;
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                this.user = user;
+                this.useremail = user.email;
+                // console.log(this.useremail);
+            }
+        });
+    },
+    components: { BackButton }
 }
 </script>
   

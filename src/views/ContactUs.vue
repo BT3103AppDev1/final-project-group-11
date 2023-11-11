@@ -1,5 +1,7 @@
 <template>
+  <BackButton/>
     <div class="contact-us">
+      
       <h2>Contact Us</h2>
       <form @submit.prevent="submitForm">
         <div class="form-group">
@@ -26,6 +28,7 @@
 <script>
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { getFirestore, collection, addDoc } from "firebase/firestore";
+import BackButton from "../components/BackButton.vue";
 
   export default {
     data() {
@@ -38,6 +41,7 @@ import { getFirestore, collection, addDoc } from "firebase/firestore";
         useremail: "",
 
       };
+      
     },
   //   data() {
   //   return {
@@ -84,6 +88,7 @@ import { getFirestore, collection, addDoc } from "firebase/firestore";
       }
     },
   },
+  components: { BackButton }
 };
 </script>      
    
