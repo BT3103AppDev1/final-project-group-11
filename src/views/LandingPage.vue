@@ -1,5 +1,5 @@
    <template>
-    <NavBar/>
+    <NavBar_Before/>
     <Login />
     <div class="landing-page">
       <header>
@@ -31,13 +31,14 @@
 </template>
 
 <script>
-  import NavBar from '@/components/NavBar.vue' 
+
   import Login from '@/components/Login.vue'
+  import NavBar_Before from '../components/NavBar_Before.vue';
   export default {
     components: {
-      NavBar,
-      Login,
-    }
+    Login,
+    NavBar_Before,
+}
     // need to complete logic 
   };
   </script>
