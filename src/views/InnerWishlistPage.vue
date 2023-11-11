@@ -4,12 +4,17 @@
         <NavBar />
     </div>
 
-    <div class="sort-by-buttons">
+    <div v-if="queriedProducts.length > 0" class="sort-by-buttons">
       <SortBy :queriedProducts="queriedProducts" />
     </div>
+
     <!-- <div id="products-title">
       <Header headerText="Products" />
     </div> -->
+
+      <!-- <div id="recommended-title">
+        <Header headerText="Recomended Product" />
+      </div> -->
 
     <!-- <div class="wishlist-pink-box">
       <div class="products-list">
@@ -21,17 +26,6 @@
       <RecommendedProducts :wishlistProducts="wishlistProducts" :queriedProducts="queriedProducts" />
     </div>
 
-    <!--
-    <div class="price-tracker">
-      <PriceTracker />
-    </div>
-    -->
-    <HeartClick />
-
-
-    <!-- <div id="recommended-title">
-      <Header headerText="Recomended Product" />
-    </div> -->
   </div>
 </template>
 
@@ -40,8 +34,8 @@
     position: absolute;
     left: 10%;
     top: 5%;
-    justify-content: space-around; /* Space buttons evenly along the horizontal axis */
-    padding: 15px; /* Adjust the padding as needed */
+    justify-content: space-around; 
+    padding: 15px; 
   }
 
   /* #products-title {
@@ -65,15 +59,14 @@
   import SortBy from '../components/SortBy.vue'
   import Product from '../components/Product.vue'
 //import RecommendedProducts from '../components/RecommendedProducts.vue'
-//import PriceTracker from '../components/PriceTracker.vue'
   import SearchBar from '../components/SearchBar.vue';
-//import { fetchProducts } from 'firebase.js/firebase'; // Import the fetchProducts function from your firebase.js
-  import firebaseApp from '../firebase.js';
+   import firebaseApp from '../firebase.js';
   import {getAuth, onAuthStateChanged} from "firebase/auth";
   import Header from '@/components/HeaderTitle.vue';
   import HeartClick from '@/components/HeartClick.vue';
   import { addDoc, collection, doc, getDoc, getDocs, getFirestore, setDoc, query, where} from "firebase/firestore";
   import { db } from '../firebase';
+  import NavBar from '../components/NavBar.vue'
 
   const productsCollection = collection(db, 'products');
 
@@ -87,10 +80,10 @@
       SortBy,
       Product,
       // RecommendedProducts,
-      // PriceTracker,
       SearchBar,
       Header,
       HeartClick,
+      NavBar,
     },
     data() {
       return {
@@ -101,6 +94,7 @@
         queriedProducts: [],
       }
     },
+
     mounted() {
       const auth = getAuth();
       onAuthStateChanged(auth, (user) => {
@@ -112,10 +106,9 @@
           (async () => {
           // Fetch queried products immediately upon loading the page
           await this.fetchQueriedProducts();
-        })();
-      }
-    });
-    // this.folderName = this.$route.params.folderName;
+          })();
+        }
+      });
     },
 
     async created() {
@@ -124,12 +117,6 @@
     },
 
     methods: {
-      // fetchProducts() -> based on the foldername, query all the products in the wishlist with
-      // productCategory == folderName
-
-      // fetchRecommended() -> based on folderName, query product collection -> filter and
-      // display product with lowest cost
-
       async fetchQueriedProducts() {
         const wishlistRef = doc(db, "wishlist", this.useremail);
         const wishlistDoc = await getDoc(wishlistRef);
@@ -152,14 +139,19 @@
             querySnapshot.forEach((doc) => {
               this.queriedProducts.push(doc.data());
             });
-            console.log(this.queriedProducts[0]);
+
+            // Show alert when queriedProducts is empty
+            if (this.queriedProducts.length === 0) {
+              alert("There are no products added to this folder yet.");
+            }
+
+            // console.log("queried products in folder:" + this.folderName + " " + this.queriedProducts);
           } else {
             console.log("Wishlist is empty");
             alert("Please add items into Wishlist before accessing folders");
           }
         } else {
           console.log("Error fetching wishlist data");
-          // Handle the case where the wishlist document doesn't exist
         }
       }
     }
