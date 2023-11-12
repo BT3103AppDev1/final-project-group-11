@@ -1,6 +1,7 @@
 <template>
+  <BackButtonBefore />
     <div>
-      <BackButton/>
+      
       <div class="about-container">
         <h2 class="about-title">About CompareCart</h2>
         <p class="about-description">
@@ -44,7 +45,7 @@
 
 <script>
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-import BackButton from "../components/BackButton.vue";
+import BackButtonBefore from '../components/BackButtonBefore.vue';
 
 export default {
     data() {
@@ -64,7 +65,7 @@ export default {
             }
         });
     },
-    components: { BackButton }
+    components: { BackButtonBefore }
 }
 </script>
   

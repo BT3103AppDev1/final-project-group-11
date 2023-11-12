@@ -1,6 +1,8 @@
 <template>
-  <BackButton/>
+  <BackButtonBefore />
+  
     <div class="contact-us">
+      
       
       <h2>Contact Us</h2>
       <form @submit.prevent="submitForm">
@@ -28,7 +30,7 @@
 <script>
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { getFirestore, collection, addDoc } from "firebase/firestore";
-import BackButton from "../components/BackButton.vue";
+import BackButtonBefore from "../components/BackButtonBefore.vue";
 
   export default {
     data() {
@@ -88,7 +90,7 @@ import BackButton from "../components/BackButton.vue";
       }
     },
   },
-  components: { BackButton }
+  components: { BackButtonBefore }
 };
 </script>      
    
