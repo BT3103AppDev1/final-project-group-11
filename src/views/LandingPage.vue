@@ -9,7 +9,7 @@
         <h2>Discover Our Products</h2>
         <p>Explore our wide range of high-quality products at great prices.</p>
         <router-link to="/SearchPage">
-          <button>View Products</button>
+          <button>Login to View Products</button>
         </router-link>
       </section>
       <section>
