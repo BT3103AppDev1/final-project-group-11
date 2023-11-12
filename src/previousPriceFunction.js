@@ -2,7 +2,7 @@ import { doc, collection, getDocs, updateDoc, query } from 'firebase/firestore';
 import { db } from './firebase';
 
 // Function to update 'PreviousPrices' field in existing documents
-/* export async function updatePreviousPrices() {
+export async function updatePreviousPrices() {
   const productsRef = collection(db, 'products');
   const querySnapshot = await getDocs(productsRef);
 
@@ -23,7 +23,7 @@ import { db } from './firebase';
     await updateDoc(doc(productsRef, docSnapshot.id), { PreviousPrices: previousPrices });
     console.log(`Updated 'PreviousPrices' for document with ID: ${docSnapshot.id}`);
   });
-} */
+} 
 
 // Function to add a field called document name (which is the same as the document ID inside the document)
 export async function addDocName() {

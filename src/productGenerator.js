@@ -21,7 +21,7 @@ export async function generateAndAddProducts() {
     'Toys and Games': 1,
   };
 
-  for (let i = 0; i < 100; i++) {
+  for (let i = 0; i < 200; i++) {
     const product = generateRandomProduct(productCounts);
     const docName = `${product.ProductCategory.replace(/\s+/g, '-')}-${productCounts[product.ProductCategory]}`;
     productCounts[product.ProductCategory] += 1;
