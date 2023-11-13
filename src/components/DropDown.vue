@@ -43,7 +43,7 @@ export default {
       selectedProduct: "",
       productObject: {
         "Water Bottle": [
-          "Blue Water Bottle", 'Green Sports Bottle', 'Stainless Steel Water Flask', 'Reusable Glass Water Bottle', 'Hiking Water Jug', 'Kids Sippy Cup', 'Hydration Pack', 'Infuser Water Bottle'
+          'Green Sports Bottle', 'Stainless Steel Water Flask', 'Hiking Water Jug', 'Kids Sippy Cup', 'Hydration Pack', 'Infuser Water Bottle'
         ],
         "Birthday Items": [
           'Birthday Cake', 'Party Balloons', 'Gift Wrapping Paper', 'Party Hats', 'Confetti Poppers', 'Birthday Candles'
@@ -58,19 +58,19 @@ export default {
           'Dress', 'Shirt', 'Jeans', 'Sneakers', 'Handbag', 'Necklace', 'Sunglasses', 'Wristwatch'
         ],
         "Home and Kitchen": [
-          'Sofa', 'Refrigerator', 'Dining Table', 'Coffee Maker', 'Bed', 'Vacuum Cleaner', 'Toaster', 'Blender'
+          'Sofa', 'Refrigerator', 'Dining Table', 'Coffee Maker', 'Bed', 'Vacuum Cleaner', 'Blender'
         ],
         "Beauty and Personal Care": [
-          'Skincare Set', 'Lipstick', 'Shampoo', 'Razor', 'Perfume', 'Hair Dryer', 'Toothbrush', 'Nail Polish'
+          'Skincare Set', 'Lipstick', 'Shampoo', 'Perfume', 'Hair Dryer', 'Toothbrush', 'Nail Polish'
         ],
         "Sports and Outdoors": [
-          'Tennis Racket', 'Bicycle', 'Running Shoes', 'Camping Tent', 'Fitness Tracker', 'Hiking Boots', 'Yoga Mat', 'Soccer Ball'
+          'Tennis Racket', 'Bicycle', 'Running Shoes', 'Camping Tent', 'Fitness Tracker', 'Yoga Mat', 'Soccer Ball'
         ],
         "Books and Media": [
-          'Novel', 'Action Movie', 'Music Album', 'Cookbook', 'Sci-Fi Book', 'Documentary Film', 'Mystery Novel', 'Romantic Comedy'
+          'Novel', 'Action Movie', 'Music Album', 'Cookbook', 'Sci-Fi Book', 'Documentary Film', 'Romantic Comedy'
         ],
         "Toys and Games": [
-          'Action Figure', 'Board Game', 'Puzzle', 'Doll', 'LEGO Set', 'Video Game', 'Remote Control Car', 'Chess Set'
+          'Action Figure', 'Board Game', 'Puzzle', 'Doll', 'Video Game', 'Remote Control Car'
         ],
       },
       selectedSubcategory: "",
