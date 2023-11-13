@@ -1,44 +1,71 @@
-   <template>
-    <div class="landing-page">
-      <header>
-        <h1>Welcome to Compare Cart</h1>
-        <p>Your go-to source for amazing products.</p>
-        <Login/>
-      </header>
-      <section>
-        <h2>Discover Our Products</h2>
-        <p>Explore our wide range of high-quality products at great prices.</p>
-        <router-link to="/SearchPage">
-          <button>Login to View Products</button>
-        </router-link>
-      </section>
-      <section>
-        <h2>About Us</h2>
-        <p>Learn about our mission and commitment to customer satisfaction.</p>
-        <router-link to="/About">
-          <button>About Us</button>
-        </router-link>
-      </section>
-      <section>
-        <h2>Contact Us</h2>
-        <p>Have questions or need assistance? Contact us today.</p>
-        <router-link to="/ContactUs">
-          <button>Contact Us</button>
-        </router-link>
-      </section>
-    </div>
+<template>
+  <div class="landing-page">
+    <header>
+      <h1>Welcome to Compare Cart</h1>
+      <p>Your go-to source for amazing products.</p>
+      <Login v-if="!user" />
+      <!-- Add ErrorModal component here -->
+      <ErrorModal :show="showErrorModal" @close="closeErrorModal" />
+    </header>
+    <section>
+      <h2>Discover Our Products</h2>
+      <p>Explore our wide range of high-quality products at great prices.</p>
+      <router-link v-if="user" to="/SearchPage">
+        <button>Login to View Products</button>
+      </router-link>
+      <button v-else @click="showError">View Products</button>
+    </section>
+    <section>
+      <h2>About Us</h2>
+      <p>Learn about our mission and commitment to customer satisfaction.</p>
+      <router-link to="/About">
+        <button>About Us</button>
+      </router-link>
+    </section>
+    <section>
+      <h2>Contact Us</h2>
+      <p>Have questions or need assistance? Contact us today.</p>
+      <router-link to="/ContactUs">
+        <button>Contact Us</button>
+      </router-link>
+    </section>
+  </div>
 </template>
 
 <script>
+import Login from "@/components/Login.vue";
+import ErrorModal from "@/components/ErrorModal.vue";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 
-  import Login from '@/components/Login.vue'
-  export default {
-    components: {
-      Login,
-    }
-  
-  };
-  </script>
+export default {
+  components: {
+    Login,
+    ErrorModal,
+  },
+  data() {
+    return {
+      user: null,
+      showErrorModal: false,
+    };
+  },
+  mounted() {
+    const auth = getAuth();
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        this.user = user;
+        this.useremail = user.email;
+      }
+    });
+  },
+  methods: {
+    showError() {
+      this.showErrorModal = true;
+    },
+  },
+};
+</script>
+
+
 
   <style scoped>
   .landing-page {
