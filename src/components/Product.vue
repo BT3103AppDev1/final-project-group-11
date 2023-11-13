@@ -55,16 +55,16 @@ export default {
     imagePath() {
       // Replace 'category1', 'category2', etc., with the actual category values you have in your data
       const categoryPaths = {
-        "Waterbottle": "src/assets/products/waterbottle.png",
-        "Birthday": "src/assets/products/birthday.png",
-        "Dog Products": "src/assets/products/dog-products.png",
-        "Electronics": "src/assets/products/electronics.png",
-        "Fashion": "src/assets/products/fashion.png",
-        "Home and Kitchen": "src/assets/products/home-and-kitchen.png",
-        "Beauty and Personal Care": "src/assets/products/beauty-and-personal-care.png",
-        "Sports and Outdoors": "src/assets/products/sports-and-outdoors.png",
-        "Books and Media": "src/assets/products/books-and-media.png",
-        "Toys and Games": "src/assets/products/toys-and-games.png",
+        "Waterbottle": "https://cdn-icons-png.flaticon.com/512/2447/2447774.png",
+        "Birthday": "https://cdn-icons-png.flaticon.com/512/4549/4549811.png",
+        "Dog Products": "https://cdn-icons-png.flaticon.com/512/5793/5793514.png",
+        "Electronics": "https://static.thenounproject.com/png/1180247-200.png",
+        "Fashion": "https://cdn-icons-png.flaticon.com/512/1198/1198307.png",
+        "Home and Kitchen": "https://cdn-icons-png.flaticon.com/512/1698/1698742.png",
+        "Beauty and Personal Care": "https://cdn-icons-png.flaticon.com/512/3378/3378785.png",
+        "Sports and Outdoors": "https://cdn-icons-png.flaticon.com/512/7438/7438654.png",
+        "Books and Media": "https://cdn-icons-png.flaticon.com/512/5432/5432699.png",
+        "Toys and Games": "https://cdn-icons-png.flaticon.com/512/3082/3082060.png",
         // Add more categories as needed
       };
       const category = this.product.ProductCategory;
